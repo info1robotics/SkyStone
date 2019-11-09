@@ -15,8 +15,8 @@ import org.firstinspires.ftc.teamcode.movement.MoveRobotLinear;
 public class TeleOpBasic extends LinearOpMode {
 
     MoveRobotLinear movementController;
-    ArmMotors armController;
-    private final double MOVEMENT_SPEED = 0.5;
+    //ArmMotors armController;
+    private final double MOVEMENT_SPEED = 1.0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -24,7 +24,7 @@ public class TeleOpBasic extends LinearOpMode {
         movementController = new MoveRobotLinear(hardwareMap, telemetry,
                 this);
 
-        armController = new ArmMotors(hardwareMap, telemetry, this);
+        //armController = new ArmMotors(hardwareMap, telemetry, this);
 
         telemetry.update();
 
@@ -67,26 +67,26 @@ public class TeleOpBasic extends LinearOpMode {
 
             if(gamepad1.left_bumper) {
                 Utilities.contractArm(armController, gamepad1, this);
-            }*/
+            }
 
             if(gamepad1.right_bumper) {
                 Utilities.extendArm(armController, gamepad1, this);
-            }
+            }*/
 
             /*
             if(gamepad1.right_stick_y != 0) {
                 Utilities.changeHookRotatorElevation(armController, gamepad1,
                         this);
-            }*/
+            }
            // 
-
+           /*
             if (gamepad1.a) {
                 armController.makeHookIdle();
             }
 
             if (gamepad1.b) {
                 armController.makeHookHold();
-            }
+            }*/
 
             /*if(gamepad1.y) {
                 Utilities.climbOnLadder(armController, gamepad1, this);
