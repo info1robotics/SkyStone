@@ -55,7 +55,7 @@ public class TeleOpBasic extends LinearOpMode {
             if (gamepad1.dpad_left) Utilities.moveLeft(movementController,
                     gamepad1, MOVEMENT_SPEED, this);
 
-            if (gamepad1.left_trigger > 0)
+            /*if (gamepad1.left_trigger > 0)
                 Utilities.spinLeft(movementController, gamepad1, this);
             if (gamepad1.right_trigger > 0)
                 Utilities.spinRight(movementController, gamepad1, this);
@@ -86,8 +86,7 @@ public class TeleOpBasic extends LinearOpMode {
 
             if(gamepad1.y) {
                 armController.raiseBarrier();
-            }
-
+            }*/
 
             idle();
             telemetry.addLine("Connection active");

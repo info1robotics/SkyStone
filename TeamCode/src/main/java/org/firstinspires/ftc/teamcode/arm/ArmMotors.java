@@ -27,17 +27,17 @@ public class ArmMotors {
 
     public ArmMotors(HardwareMap hardwareMap, Telemetry telemetry,
                      TeleOpBasic opMode) {
-        extenderMotor = hardwareMap.get(DcMotor.class,
-                "extenderMotor");
-        barrierMotor = hardwareMap.get(DcMotor.class, "barrierMotor");
-        hookLeft = hardwareMap.get(Servo.class, "hookLeftMotor");
-        hookRight = hardwareMap.get(Servo.class, "hookRightMotor");
+        //extenderMotor = hardwareMap.get(DcMotor.class,
+        //        "extenderMotor");
+        //barrierMotor = hardwareMap.get(DcMotor.class, "barrierMotor");
+        //hookLeft = hardwareMap.get(Servo.class, "hookLeftMotor");
+        //hookRight = hardwareMap.get(Servo.class, "hookRightMotor");
 
 
         this.opMode = opMode;
 
-        hookLeft.setPosition(HOOK_LEFT_POSITION_IDLE);
-        hookRight.setPosition(HOOK_RIGHT_POSITION_IDLE);
+        //hookLeft.setPosition(HOOK_LEFT_POSITION_IDLE);
+        //hookRight.setPosition(HOOK_RIGHT_POSITION_IDLE);
 
         console = telemetry;
         console.addData("ArmMotors class", "Set up.");
@@ -104,9 +104,9 @@ public class ArmMotors {
     }
 
     public void stopAll() {
-        extenderMotor.setPower(0);
+        //extenderMotor.setPower(0);
 
-        barrierMotor.setPower(0);
+        //barrierMotor.setPower(0);
         //climbMotor.setPower(0);
         console.addLine("Stopped arm completely");
         console.update();
