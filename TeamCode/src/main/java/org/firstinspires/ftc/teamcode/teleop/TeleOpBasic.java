@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.arm.ArmMotors;
+import org.firstinspires.ftc.teamcode.movement.MoveRobotAsym;
 import org.firstinspires.ftc.teamcode.movement.MoveRobotLinear;
 
 /**
@@ -14,16 +15,17 @@ import org.firstinspires.ftc.teamcode.movement.MoveRobotLinear;
 @TeleOp(name = "Basic Manual Control")
 public class TeleOpBasic extends LinearOpMode {
 
-    MoveRobotLinear movementController;
+    MoveRobotAsym movementController;
+    ArmMotors armController;
     //ArmMotors armController;
-    private final double MOVEMENT_SPEED = 1.0;
+    private static double MOVEMENT_SPEED = 1.0;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        movementController = new MoveRobotLinear(hardwareMap, telemetry,
-                this);
-
+        movementController = new MoveRobotAsym(hardwareMap, telemetry,
+                this, gamepad1);
+        armController = new ArmMotors(hardwareMap, telemetry, this);
         //armController = new ArmMotors(hardwareMap, telemetry, this);
 
         telemetry.update();
@@ -57,44 +59,18 @@ public class TeleOpBasic extends LinearOpMode {
             if (gamepad1.right_trigger > 0)
                 Utilities.spinRight(movementController, gamepad1, this);
 
+//ARM
+            if(gamepad1.a)
+                armController.closeBarrier();
 
-            // Arm Movement
+            if(gamepad1.b)
+                armController.openBarrier();
 
-            /*if(gamepad1.left_stick_y != 0) {
-                Utilities.changeArmElevation(armController, gamepad1,
-                        this);
-            }
+            if(gamepad1.x)
+                MOVEMENT_SPEED = 0.5;
+            if(gamepad1.y)
+                MOVEMENT_SPEED = 1.0;
 
-            if(gamepad1.left_bumper) {
-                Utilities.contractArm(armController, gamepad1, this);
-            }
-
-            if(gamepad1.right_bumper) {
-                Utilities.extendArm(armController, gamepad1, this);
-            }*/
-
-            /*
-            if(gamepad1.right_stick_y != 0) {
-                Utilities.changeHookRotatorElevation(armController, gamepad1,
-                        this);
-            }
-           // 
-           /*
-            if (gamepad1.a) {
-                armController.makeHookIdle();
-            }
-
-            if (gamepad1.b) {
-                armController.makeHookHold();
-            }*/
-
-            /*if(gamepad1.y) {
-                Utilities.climbOnLadder(armController, gamepad1, this);
-            }
-
-            if(gamepad1.x) {
-                Utilities.descendFromLander(armController, gamepad1, this);
-            }*/
 
             idle();
             telemetry.addLine("Connection active");
