@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.movement;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.MotorsConstants;
 
 public class MoveRobotAsym {
     private MovementMotors motorsController;
@@ -44,9 +46,28 @@ public class MoveRobotAsym {
         }
     }
 
+    public void move(Power direction, double centimeters) {
+        motorsController.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorsController.setTargetPosition((int)(centimeters * MotorsConstants.ticks.TICKS_PER_CENTIMETER_FORWARD), direction);
+        motorsController.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        while(motorsController.isBusy()) {
+            motorsController.setPower(movementPower.multiply(direction));
+            console.addLine(movementPower.multiply(direction).toString());
+            console.update();
+            opMode.idle();
+        }
+
+    }
+
     public void moveForward(double speed) {
         movementPower.setPower(speed);
         move(Signs.FORWARD);
+    }
+
+    public void moveForward(double speed, double centimeters) {
+        movementPower.setPower(speed);
+        move(Signs.FORWARD, centimeters);
     }
 
     public void moveBackward(double speed) {
@@ -54,14 +75,32 @@ public class MoveRobotAsym {
         move(Signs.BACKWARD);
     }
 
+
+    public void moveBackward(double speed, double centimeters) {
+        movementPower.setPower(speed);
+        move(Signs.BACKWARD, centimeters);
+    }
+
     public void moveLeft(double speed) {
         movementPower.setPower(speed);
         move(Signs.LEFT);
     }
 
+
+    public void moveLeft(double speed, double centimeters) {
+        movementPower.setPower(speed);
+        move(Signs.LEFT, centimeters);
+    }
+
     public void moveRight(double speed) {
         movementPower.setPower(speed);
         move(Signs.RIGHT);
+    }
+
+
+    public void moveRight(double speed, double centimeters) {
+        movementPower.setPower(speed);
+        move(Signs.RIGHT, centimeters);
     }
 
     public void moveForwardLeft(double speed, double angularSpeed) {
@@ -91,7 +130,7 @@ public class MoveRobotAsym {
     }
 
     public void stopAll() {
-        motorsController.setPower(new Power());
+        motorsController.stopAll();
     }
 
 }

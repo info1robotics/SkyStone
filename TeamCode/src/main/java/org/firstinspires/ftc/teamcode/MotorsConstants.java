@@ -9,4 +9,8 @@ public final class MotorsConstants {
         public static final double RIGHT_HOLD = 0.9;
 
     }
+
+    public final class ticks {
+        public static final double TICKS_PER_CENTIMETER_FORWARD = 34.13;
+    }
 }

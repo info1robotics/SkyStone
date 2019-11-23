@@ -36,6 +36,43 @@ public class MovementMotors {
         //console.update();
     }
 
+    public void setMode(DcMotor.RunMode runMode) {
+        fl.setMode(runMode);
+        fr.setMode(runMode);
+        bl.setMode(runMode);
+        br.setMode(runMode);
+    }
+
+    public void setTargetPosition(int position, Power direction) {
+        fl.setTargetPosition((int)(direction.fl * position));
+        fr.setTargetPosition((int)(direction.fr * position));
+        bl.setTargetPosition((int)(direction.bl * position));
+        br.setTargetPosition((int)(direction.br * position));
+    }
+
+    public boolean isBusy() {
+        return fl.isBusy() || fr.isBusy() || bl.isBusy() || br.isBusy();
+    }
+
+    public void stopAll() {
+        fl.setPower(0);
+        fr.setPower(0);
+        bl.setPower(0);
+        br.setPower(0);
+    }
+
+    public String toString() {
+        String res = "";
+        res += " fl: ";
+        res += Double.toString(fl.getPower());
+        res += " fr: ";
+        res += Double.toString(fr.getPower());
+        res += " bl: ";
+        res += Double.toString(bl.getPower());
+        res += " br: ";
+        res += Double.toString(br.getPower());
+        return res;
+    }
 
 
 }

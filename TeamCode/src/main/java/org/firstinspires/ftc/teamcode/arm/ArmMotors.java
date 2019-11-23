@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.arm;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -12,10 +13,10 @@ public class ArmMotors {
 
     private Telemetry console;
 
-    private TeleOpBasic opMode;
+    private LinearOpMode opMode;
 
 
-    public ArmMotors(HardwareMap hardwareMap, Telemetry telemetry, TeleOpBasic opMode) {
+    public ArmMotors(HardwareMap hardwareMap, Telemetry telemetry, LinearOpMode opMode) {
         this.opMode = opMode;
 
         barrierLeft = hardwareMap.get(Servo.class, "motorBarrierLeft");
@@ -36,6 +37,9 @@ public class ArmMotors {
     public void closeBarrier() {
         barrierLeft.setPosition(MotorsConstants.barrierMotors.LEFT_HOLD);
         barrierRight.setPosition(MotorsConstants.barrierMotors.RIGHT_HOLD);
+
+        console.addLine("CLOSE SERVO");
+        console.update();
     }
 
     public void stopAll() {
