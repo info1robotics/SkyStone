@@ -26,9 +26,9 @@ public class MovementMotors {
     }
 
     public void setPower(Power power) {
-        fl.setPower(power.fl);
+        fl.setPower(-1.0 * power.fl);
         fr.setPower(power.fr);
-        bl.setPower(power.bl);
+        bl.setPower(-1.0 * power.bl);
         br.setPower(power.br);
 
         //console.addData("DEBUG", fl.toString() + " " +
@@ -44,9 +44,9 @@ public class MovementMotors {
     }
 
     public void setTargetPosition(int position, Power direction) {
-        fl.setTargetPosition((int)(direction.fl * position));
+        fl.setTargetPosition((int)( -1.0 * direction.fl * position));
         fr.setTargetPosition((int)(direction.fr * position));
-        bl.setTargetPosition((int)(direction.bl * position));
+        bl.setTargetPosition((int)(-1.0 * direction.bl * position));
         br.setTargetPosition((int)(direction.br * position));
     }
 

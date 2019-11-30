@@ -71,6 +71,12 @@ public class TeleOpBasic extends LinearOpMode {
             if(gamepad1.y)
                 MOVEMENT_SPEED = 1.0;
 
+            if(Math.abs(gamepad1.left_stick_x) > 0.1 ||
+                    Math.abs(gamepad1.left_stick_y) > 0.1 ||
+            Math.abs(gamepad1.right_stick_x) > 0.1) {
+                movementController.moveExp(gamepad1.left_stick_x,
+                        -gamepad1.left_stick_y, gamepad1.right_stick_x);
+            } else movementController.stopAll();
 
             idle();
             telemetry.addLine("Connection active");

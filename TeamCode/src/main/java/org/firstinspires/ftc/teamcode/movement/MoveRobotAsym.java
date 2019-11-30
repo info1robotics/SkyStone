@@ -60,6 +60,37 @@ public class MoveRobotAsym {
 
     }
 
+    public void moveExp(double drive, double strafe, double twist) {
+        double[] powers = {
+                (drive + strafe + twist),
+                (strafe - drive - twist),
+                (strafe - drive + twist),
+                (drive + strafe - twist)
+
+
+                //
+        };
+
+        double max = Math.abs(powers[0]);
+        for(int i = 1; i < powers.length; i++)
+            if(max < Math.abs(powers[i])) {
+                max = Math.abs(powers[i]);
+            }
+
+        if(max > 1) {
+            for(int i = 0; i < powers.length; i++)
+                powers[i] /= max;
+        }
+        motorsController.setPower(new Power(
+                powers[0],
+                powers[1],
+                powers[2],
+                powers[3]
+        ));
+
+
+    }
+
     public void moveForward(double speed) {
         movementPower.setPower(speed);
         move(Signs.FORWARD);
