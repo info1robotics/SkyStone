@@ -70,7 +70,7 @@ public class WebcamVision {
             int minDeltaWidth = 10000;
 
             for (Recognition r: recognitions) {
-                int deltaWidth = (int)Math.abs(r.getImageWidth() / 2 - ((r.getLeft() + r.getRight()) / 2));
+                int deltaWidth = (int)Math.abs((r.getImageWidth() / 2) - ((r.getLeft() + r.getRight()) / 2));
 
                 String res = "";
                 res += r.getLabel();
@@ -88,7 +88,6 @@ public class WebcamVision {
             console.addLine(mainObject.getLabel());
             console.update();
 
-            if (mainObject == null) return new DetectedObject(ObjectCodes.NO_OBJECT, minDeltaWidth);
             if (mainObject.getLabel().equals(LABEL_SKYSTONE))
                 return new DetectedObject(ObjectCodes.SKYSTONE, minDeltaWidth);
             if (mainObject.getLabel().equals(LABEL_STONE))

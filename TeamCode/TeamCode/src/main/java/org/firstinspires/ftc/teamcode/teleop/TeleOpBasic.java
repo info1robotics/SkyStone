@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.arm.ArmMotors;
-import org.firstinspires.ftc.teamcode.movement.MoveRobotLinear;
 import org.slf4j.helpers.Util;
 
 /**

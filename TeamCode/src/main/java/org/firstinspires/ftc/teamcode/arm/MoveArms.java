@@ -6,9 +6,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.MotorsConstants;
-import org.firstinspires.ftc.teamcode.teleop.TeleOpBasic;
 
-public class ArmMotors {
+public class MoveArms {
     private Servo barrierLeft, barrierRight;
 
     private Telemetry console;
@@ -16,7 +15,7 @@ public class ArmMotors {
     private LinearOpMode opMode;
 
 
-    public ArmMotors(HardwareMap hardwareMap, Telemetry telemetry, LinearOpMode opMode) {
+    public MoveArms(HardwareMap hardwareMap, Telemetry telemetry, LinearOpMode opMode) {
         this.opMode = opMode;
 
         barrierLeft = hardwareMap.get(Servo.class, "motorBarrierLeft");
@@ -25,7 +24,7 @@ public class ArmMotors {
         barrierRight.setPosition(MotorsConstants.barrierMotors.RIGHT_IDLE);
 
         console = telemetry;
-        console.addData("ArmMotors class", "Set up.");
+        console.addData("MoveArms class", "Set up.");
     }
 
     public void openBarrier() {

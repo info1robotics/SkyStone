@@ -57,7 +57,7 @@ public class ArmMotors {
         baseMotorLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         baseMotorRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);*/
         console = telemetry;
-        console.addData("ArmMotors class", "Set up.");
+        console.addData("MoveArms class", "Set up.");
     }
 
     public void raiseArm(double powerFactor) {

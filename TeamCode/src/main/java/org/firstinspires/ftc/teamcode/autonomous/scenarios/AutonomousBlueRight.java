@@ -1,9 +1,13 @@
-package org.firstinspires.ftc.teamcode.autonomous;
+package org.firstinspires.ftc.teamcode.autonomous.scenarios;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
+
+import static org.firstinspires.ftc.teamcode.MotorsConstants.robotMovement.MOVEMENT_SPEED;
+
 @Autonomous(name = "Autonomie Albastru Stânga")
-public class AutonomousBlueRight extends AutonomousBasic {
+public class AutonomousBlueRight extends AutonomousBase {
     public void runCommands() throws InterruptedException {
         MOVEMENT_SPEED = 0.5;
 

@@ -1,19 +1,12 @@
-package org.firstinspires.ftc.teamcode.autonomous;
+package org.firstinspires.ftc.teamcode.autonomous.scenarios;
 
-import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.robotcore.external.ClassFactory;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
-import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
-import org.firstinspires.ftc.teamcode.R;
+import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
 import org.firstinspires.ftc.teamcode.vision.DetectedObject;
 import org.firstinspires.ftc.teamcode.vision.ObjectCodes;
-import org.firstinspires.ftc.teamcode.vision.WebcamVision;
-import org.firstinspires.ftc.teamcode.movement.Signs;
+
+import static org.firstinspires.ftc.teamcode.MotorsConstants.robotMovement.MOVEMENT_SPEED;
 
 /*
  * This sample demonstrates how to stream frames from Vuforia to the dashboard. Make sure to fill in
@@ -21,7 +14,7 @@ import org.firstinspires.ftc.teamcode.movement.Signs;
  * also works for UVCs with slight adjustments.
  */
 @Autonomous
-public class AutonomousVision extends AutonomousBasic {
+public class AutonomousVision extends AutonomousBase {
 
     @Override
     public void runCommands() throws InterruptedException {

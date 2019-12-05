@@ -30,10 +30,6 @@ public class MovementMotors {
         fr.setPower(power.fr);
         bl.setPower(-1.0 * power.bl);
         br.setPower(power.br);
-
-        //console.addData("DEBUG", fl.toString() + " " +
-                //fr.toString() + " " + bl.toString() + " " + br.toString());
-        //console.update();
     }
 
     public void setMode(DcMotor.RunMode runMode) {
