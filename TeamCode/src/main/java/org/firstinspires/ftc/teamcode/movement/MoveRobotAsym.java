@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.MotorsConstants;
 
 public class MoveRobotAsym {
-    private MovementMotors motorsController;
+    public MovementMotors motorsController;
     private Power movementPower;
     private LinearOpMode opMode;
     private Gamepad gamepad;
@@ -27,23 +27,7 @@ public class MoveRobotAsym {
     }
 
     private void move(Power direction) {
-        Power targetPower = new Power(movementPower.multiply(direction));
-        Power currentPower = new Power(0.1).multiply(direction);
-
-
-        while(opMode.opModeIsActive() && (gamepad.dpad_up || gamepad.dpad_down || gamepad.dpad_left || gamepad.dpad_right)) {
-            currentPower = currentPower.add(targetPower.subtract(currentPower).multiply(0.1));
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            console.addLine("CURRENT");
-            console.addLine(currentPower.toString());
-            console.update();
-            motorsController.setPower(currentPower);
-        }
+        motorsController.setPower(direction);
     }
 
     public void move(Power direction, double centimeters) {
@@ -66,9 +50,6 @@ public class MoveRobotAsym {
                 (strafe - drive - twist),
                 (strafe - drive + twist),
                 (drive + strafe - twist)
-
-
-                //
         };
 
         double max = Math.abs(powers[0]);
