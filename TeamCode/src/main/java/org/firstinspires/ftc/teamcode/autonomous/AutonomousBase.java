@@ -4,13 +4,13 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.arm.MoveArms;
-import org.firstinspires.ftc.teamcode.movement.MoveRobot;
+import org.firstinspires.ftc.teamcode.arm.ArmsController;
+import org.firstinspires.ftc.teamcode.movement.MovementController;
 import org.firstinspires.ftc.teamcode.vision.WebcamVision;
 
 public abstract class AutonomousBase extends LinearOpMode {
-    public MoveRobot movementController;
-    public MoveArms armController;
+    public MovementController movementController;
+    public ArmsController armController;
     public WebcamVision visionController;
 
 
@@ -24,9 +24,9 @@ public abstract class AutonomousBase extends LinearOpMode {
         dashboard = FtcDashboard.getInstance();
         dashboardTelemetry = dashboard.getTelemetry();
 
-        movementController = new MoveRobot(hardwareMap, telemetry,
+        movementController = new MovementController(hardwareMap, telemetry,
                 this);
-        armController = new MoveArms(hardwareMap, telemetry, this);
+        armController = new ArmsController(hardwareMap, telemetry, this);
         visionController = new WebcamVision(hardwareMap, dashboardTelemetry);
 
         FtcDashboard.getInstance().startCameraStream(visionController.tfod, 0);

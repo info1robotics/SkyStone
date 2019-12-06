@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.MotorsConstants;
 
-public class MoveRobot {
+public class MovementController {
     public MovementMotors motorsController;
     private LinearOpMode opMode;
 
@@ -15,8 +15,8 @@ public class MoveRobot {
 
     private boolean isMoving = false;
 
-    public MoveRobot(HardwareMap hardwareMap, Telemetry telemetry,
-                     LinearOpMode opMode) {
+    public MovementController(HardwareMap hardwareMap, Telemetry telemetry,
+                              LinearOpMode opMode) {
         motorsController = new MovementMotors(hardwareMap, telemetry);
         this.opMode = opMode;
 

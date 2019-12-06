@@ -1,10 +1,9 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.arm.MoveArms;
-import org.firstinspires.ftc.teamcode.movement.MoveRobot;
+import org.firstinspires.ftc.teamcode.arm.ArmsController;
+import org.firstinspires.ftc.teamcode.movement.MovementController;
 
 /**
  * Class which listens for controller input and calls the correct
@@ -13,16 +12,16 @@ import org.firstinspires.ftc.teamcode.movement.MoveRobot;
 
 public abstract class TeleOpBase extends LinearOpMode {
 
-    MoveRobot movementController;
-    MoveArms armController;
-    //MoveArms armController;
+    public MovementController movementController;
+    public ArmsController armsController;
+    //ArmsController armsController;
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() {
 
-        movementController = new MoveRobot(hardwareMap, telemetry,
+        movementController = new MovementController(hardwareMap, telemetry,
                 this);
-        armController = new MoveArms(hardwareMap, telemetry, this);
+        armsController = new ArmsController(hardwareMap, telemetry, this);
 
         telemetry.update();
 
@@ -35,15 +34,13 @@ public abstract class TeleOpBase extends LinearOpMode {
         }
 
 
-        while (opModeIsActive()) {
+        run();
 
-            checkInputs();
-
-        }
+        while(opModeIsActive());
 
     }
 
-    abstract void checkInputs();
+    abstract void run();
 
 
 }
