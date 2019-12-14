@@ -13,9 +13,6 @@ public class MovementMotors {
     public MovementMotors(HardwareMap hardwareMap, Telemetry telemetry) {
 
         console = telemetry;
-        console.addData("MovementMotors class", "Setting Up.");
-        console.update();
-
         fl = hardwareMap.get(DcMotor.class, "motorFL");
         fr = hardwareMap.get(DcMotor.class, "motorFR");
         bl = hardwareMap.get(DcMotor.class, "motorBL");
@@ -26,16 +23,49 @@ public class MovementMotors {
     }
 
     public void setPower(Power power) {
-        fl.setPower(power.fl);
+        fl.setPower(-1.0 * power.fl);
         fr.setPower(power.fr);
-        bl.setPower(power.bl);
+        bl.setPower(-1.0 * power.bl);
         br.setPower(power.br);
-
-        //console.addData("DEBUG", fl.toString() + " " +
-                //fr.toString() + " " + bl.toString() + " " + br.toString());
-        //console.update();
     }
 
+    public void setMode(DcMotor.RunMode runMode) {
+        fl.setMode(runMode);
+        fr.setMode(runMode);
+        bl.setMode(runMode);
+        br.setMode(runMode);
+    }
+
+    public void setTargetPosition(int position, Power direction) {
+        fl.setTargetPosition((int)(-1.0 * direction.fl * position));
+        fr.setTargetPosition((int)(direction.fr * position));
+        bl.setTargetPosition((int)(-1.0 * direction.bl * position));
+        br.setTargetPosition((int)(direction.br * position));
+    }
+
+    public boolean isBusy() {
+        return fl.isBusy() || fr.isBusy() || bl.isBusy() || br.isBusy();
+    }
+
+    public void stopAll() {
+        fl.setPower(0);
+        fr.setPower(0);
+        bl.setPower(0);
+        br.setPower(0);
+    }
+
+    public String toString() {
+        String res = "";
+        res += " fl: ";
+        res += Double.toString(-1.0 * fl.getPower());
+        res += " fr: ";
+        res += Double.toString(fr.getPower());
+        res += " bl: ";
+        res += Double.toString(-1.0 * bl.getPower());
+        res += " br: ";
+        res += Double.toString(br.getPower());
+        return res;
+    }
 
 
 }
