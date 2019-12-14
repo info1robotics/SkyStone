@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
 import org.firstinspires.ftc.teamcode.vision.DetectedObject;
 import org.firstinspires.ftc.teamcode.vision.ObjectCodes;
 
-import static org.firstinspires.ftc.teamcode.MotorsConstants.robotMovement.MOVEMENT_SPEED;
+import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED;
 
 /*
  * This sample demonstrates how to stream frames from Vuforia to the dashboard. Make sure to fill in
@@ -19,8 +19,8 @@ public class AutonomousVision extends AutonomousBase {
     @Override
     public void runCommands() throws InterruptedException {
 
-        movementController.moveRight(MOVEMENT_SPEED, 18.0);
-        movementController.moveBackward(MOVEMENT_SPEED, 47.0);
+        movementController.moveRightAutonomous(MOVEMENT_SPEED, 18.0);
+        movementController.moveBackwardAutonomous(MOVEMENT_SPEED, 47.0);
 
         int skystonesFound = 0;
         boolean canDetectSkystone = true;
@@ -36,14 +36,14 @@ public class AutonomousVision extends AutonomousBase {
             } else if(obj.objectCode == ObjectCodes.STONE) {
                 canDetectSkystone = true;
             }
-            movementController.moveLeft(MOVEMENT_SPEED, 10);
+            movementController.moveLeftAutonomous(MOVEMENT_SPEED, 10);
         }
         movementController.stopAll();
 
     }
 
     private  void moveStone() {
-        movementController.moveBackward(MOVEMENT_SPEED, 80);
-        movementController.moveForward(MOVEMENT_SPEED, 80);
+        movementController.moveBackwardAutonomous(MOVEMENT_SPEED, 80);
+        movementController.moveForwardAutonomous(MOVEMENT_SPEED, 80);
     }
 }

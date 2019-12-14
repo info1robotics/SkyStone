@@ -18,7 +18,7 @@ public class WebcamVision {
 
     Telemetry console;
 
-    public static final String VUFORIA_LICENSE_KEY = "AcTB3h7/////AAABma7je7SvYkkqrJT5rzDrtvh/dZ4kzPKDHWZs" +
+    private static final String VUFORIA_LICENSE_KEY = "AcTB3h7/////AAABma7je7SvYkkqrJT5rzDrtvh/dZ4kzPKDHWZs" +
             "kG12sOplNFyVylw2VzUahIt1kP22rq+oYVqkn+++JewM0W0NXk7KDbcMo0cQAtI8WcgJjYh+jTmoNuokUg2A" +
             "NIpNyrqpKBR9VU5tjQEb5akUNBkyfJiKLXWfxv79vaTGptYiGoK4pn9THnHo2PTWtlE5mpts4NjjdUJJe5u8D" +
             "9g8g0GIaLYDr6qmVuGaZ/ZeM8ZVwIo390U6uc5xJ37SmvZH4DNCALdd+isOsOJ9LYJV5Qvn0kZhO3IAoN0mLk" +
@@ -27,10 +27,8 @@ public class WebcamVision {
 
 
     private static final String TFOD_MODEL_ASSET = "Skystone.tflite";
-    private static final String LABEL_STONE = "Stone";
-    private static final String LABEL_SKYSTONE = "Skystone";
 
-    VuforiaLocalizer vuforia;
+    private VuforiaLocalizer vuforia;
     public TFObjectDetector tfod;
 
     public WebcamVision(HardwareMap hardwareMap, Telemetry console) {
@@ -45,7 +43,8 @@ public class WebcamVision {
                 "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
-        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_STONE, LABEL_SKYSTONE);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, ObjectCodes.STONE.toString(),
+                ObjectCodes.SKYSTONE.toString());
         console.addData("TF Object Detection", "Set up");
         if (tfod != null) {
             tfod.activate();
@@ -88,9 +87,9 @@ public class WebcamVision {
             console.addLine(mainObject.getLabel());
             console.update();
 
-            if (mainObject.getLabel().equals(LABEL_SKYSTONE))
+            if (mainObject.getLabel().equals(ObjectCodes.SKYSTONE.toString()))
                 return new DetectedObject(ObjectCodes.SKYSTONE, minDeltaWidth);
-            if (mainObject.getLabel().equals(LABEL_STONE))
+            if (mainObject.getLabel().equals(ObjectCodes.STONE.toString()))
                 return new DetectedObject(ObjectCodes.STONE, minDeltaWidth);
 
         }

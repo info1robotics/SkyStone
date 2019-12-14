@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop.actions;
 
-import org.firstinspires.ftc.teamcode.MotorsConstants;
+import org.firstinspires.ftc.teamcode.constants.MotorsConstants;
 import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 
 public class MoveRobotAction extends TeleOpAction {
@@ -29,11 +29,13 @@ public class MoveRobotAction extends TeleOpAction {
                 spin = gamepad1.right_trigger;
 
 
-            drive *= MotorsConstants.robotMovement.MOVEMENT_SPEED;
-            strafe *= MotorsConstants.robotMovement.MOVEMENT_SPEED;
-            spin *= MotorsConstants.robotMovement.MOVEMENT_SPEED;
+            double currentSpeed = MotorsConstants.robotMovement.MOVEMENT_SPEED;
 
-            movementController.move(drive, strafe, spin);
-        } else if(movementController.isMoving()) movementController.stopAll();
+            drive *= currentSpeed;
+            strafe *= currentSpeed;
+            spin *= currentSpeed;
+
+            movementController.moveTeleOp(drive, strafe, spin);
+        } else movementController.stopAll();
     }
 }

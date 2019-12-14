@@ -14,8 +14,8 @@ public abstract class AutonomousBase extends LinearOpMode {
     public WebcamVision visionController;
 
 
-    FtcDashboard dashboard;
-    Telemetry dashboardTelemetry;
+    private FtcDashboard dashboard;
+    protected Telemetry dashboardTelemetry;
 
     public void runOpMode() {
 

@@ -13,9 +13,6 @@ public class MovementMotors {
     public MovementMotors(HardwareMap hardwareMap, Telemetry telemetry) {
 
         console = telemetry;
-        console.addData("MovementMotors class", "Setting Up.");
-        console.update();
-
         fl = hardwareMap.get(DcMotor.class, "motorFL");
         fr = hardwareMap.get(DcMotor.class, "motorFR");
         bl = hardwareMap.get(DcMotor.class, "motorBL");
@@ -40,7 +37,7 @@ public class MovementMotors {
     }
 
     public void setTargetPosition(int position, Power direction) {
-        fl.setTargetPosition((int)( -1.0 * direction.fl * position));
+        fl.setTargetPosition((int)(-1.0 * direction.fl * position));
         fr.setTargetPosition((int)(direction.fr * position));
         bl.setTargetPosition((int)(-1.0 * direction.bl * position));
         br.setTargetPosition((int)(direction.br * position));
@@ -60,11 +57,11 @@ public class MovementMotors {
     public String toString() {
         String res = "";
         res += " fl: ";
-        res += Double.toString(fl.getPower());
+        res += Double.toString(-1.0 * fl.getPower());
         res += " fr: ";
         res += Double.toString(fr.getPower());
         res += " bl: ";
-        res += Double.toString(bl.getPower());
+        res += Double.toString(-1.0 * bl.getPower());
         res += " br: ";
         res += Double.toString(br.getPower());
         return res;
