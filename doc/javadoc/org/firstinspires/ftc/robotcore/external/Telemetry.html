@@ -107,9 +107,9 @@ var activeTableTab = "activeTableTab";
 
  <pre>
      // LinearOpMode
-     telemetry.addData("count", currentCount);
-     telemetry.addData("elapsedTime", "%.3f", elapsedSeconds);
-     telemetry.update();
+     console.addData("count", currentCount);
+     console.addData("elapsedTime", "%.3f", elapsedSeconds);
+     console.update();
  </pre>
 
  <p>In the 2015/16 season, the call to <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#update--"><code>update()</code></a> was not required; now, however,
@@ -120,12 +120,12 @@ var activeTableTab = "activeTableTab";
 
  <pre>
      // loop-based opmode
-     telemetry.addData("count", currentCount);
-     telemetry.addData("elapsedTime", "%.3f", elapsedSeconds);
+     console.addData("count", currentCount);
+     console.addData("elapsedTime", "%.3f", elapsedSeconds);
  </pre>
 
  <p>By default (but see <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#setAutoClear-boolean-"><code>setAutoClear()</code></a>), data is cleared from the
- telemetry after each call to <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#update--"><code>update()</code></a>; thus, you need to issue <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.Object-"><code>addData()</code></a> for the entire contents of the telemetry screen on each update cycle.
+ console after each call to <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#update--"><code>update()</code></a>; thus, you need to issue <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.Object-"><code>addData()</code></a> for the entire contents of the console screen on each update cycle.
  This behavior is just as it was in the 2015/16 season.</p>
 
  <p>A more complicated use of <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html" title="interface in org.firstinspires.ftc.robotcore.external"><code>Telemetry</code></a> might have different parts of the program update
@@ -133,26 +133,26 @@ var activeTableTab = "activeTableTab";
  usefully avail themselves of turning off the auto-clear setting. For example:</p>
 
  <pre>
-     telemetry.setAutoClear(false);
-     Telemetry.Item countItem = telemetry.addData("count", 0);
-     Telemetry.Item elapsedItem = telemetry.addData("elapsedTime", 0);
+     console.setAutoClear(false);
+     Telemetry.Item countItem = console.addData("count", 0);
+     Telemetry.Item elapsedItem = console.addData("elapsedTime", 0);
 
      void onePartOfYourCode() {
          ...
          countItem.setValue(0);
-         telemetry.update();
+         console.update();
          ...
      }
 
      void anotherPartOfYourCode() {
          ...
          elapsedItem.setValue("%.3f", elapsedSeconds);
-         telemetry.update();
+         console.update();
          ...
      }
  </pre>
 
- <p>In this way different parts of the code can update only a portion of the telemetry screen
+ <p>In this way different parts of the code can update only a portion of the console screen
  without disturbing other parts.</p>
 
  <p>Below the list of caption, value, pairs, on the screen a <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html" title="interface in org.firstinspires.ftc.robotcore.external"><code>Telemetry</code></a> also displays
@@ -167,21 +167,21 @@ var activeTableTab = "activeTableTab";
 
  <p>As mentioned above, by default, after each call to <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#update--"><code>update()</code></a>, the method <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clear--"><code>clear()</code></a>
  is automatically called. Thus, in simple usage, after each <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#update--"><code>update()</code></a>, you'll want to issue
- <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.Object-"><code>addData()</code></a> calls to rebuild the entire driver station telemetry
+ <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.Object-"><code>addData()</code></a> calls to rebuild the entire driver station console
  screen that you wish to observe. This simple usage can be modified in two ways.</p>
 
  <p>First, the automatic issuance of calls to <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clear--"><code>clear()</code></a> can be altered by means of
- <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#setAutoClear-boolean-"><code>setAutoClear(boolean)</code></a>. If auto clearing is set to false, previously added telemetry
+ <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#setAutoClear-boolean-"><code>setAutoClear(boolean)</code></a>. If auto clearing is set to false, previously added console
  items remain present from <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#update--"><code>update()</code></a> to <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#update--"><code>update()</code></a>, but their value can still be altered
  using <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html#setValue-java.lang.Object-"><code>Item.setValue()</code></a>, items can be removed using <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#removeItem-org.firstinspires.ftc.robotcore.external.Telemetry.Item-"><code>removeItem(Item)</code></a>,
  and new items can be added using <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.Object-"><code>addData()</code></a> and <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html#addData-java.lang.String-java.lang.Object-"><code>Item.addData()</code></a>.</p>
 
- <p>Second, telemetry items created in a functional form using <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-org.firstinspires.ftc.robotcore.external.Func-"><code>addData(String, Func)</code></a> or
+ <p>Second, console items created in a functional form using <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-org.firstinspires.ftc.robotcore.external.Func-"><code>addData(String, Func)</code></a> or
  <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html#addData-java.lang.String-org.firstinspires.ftc.robotcore.external.Func-"><code>Telemetry.Item.addData(String, Func)</code></a> are <em>not</em> automatically removed when <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clear--"><code>clear()</code></a>
  is called, either implicitly or explicitly (though they are removed when <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clearAll--"><code>clearAll()</code></a> is
- called). The intent of such items is allow a one-time specification of telemetry items by
+ called). The intent of such items is allow a one-time specification of console items by
  providing a function that can <em>produce</em> a value to be displayed rather than providing the
- actual value itself. Such functions are evaluated only when it is known that telemetry is going to
+ actual value itself. Such functions are evaluated only when it is known that console is going to
  be transmitted to the driver station (and so a value is required). This approach can be particularly
  useful if the acquisition of the data to be displayed is relatively expensive or time consuming, as
  that cost is only expended when actually useful.
@@ -191,13 +191,13 @@ var activeTableTab = "activeTableTab";
  <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.Object-"><code>addData(String, Object)</code></a> calls. For example:
 
  <pre>
-     telemetry.addLine()
+     console.addLine()
           .addData("count", currentCount)
           .addData("elapsedTime", "%.3f", seconds);
-     telemetry.addLine()
+     console.addLine()
           .addData("voltage", "%.1f", getCurrentVoltage())
           .addData("orientation", "%s", getOrientation());
-     telemetry.update();
+     console.update();
  </pre>
 
  <p>Items on the same line are separated by the <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#getItemSeparator--"><code>item separator</code></a>. Caption
@@ -226,13 +226,13 @@ var activeTableTab = "activeTableTab";
 <tr class="altColor">
 <td class="colFirst"><code>static interface&nbsp;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a></span></code>
-<div class="block">Instances of <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external"><code>Telemetry.Item</code></a> represent an item of data on the drive station telemetry display.</div>
+<div class="block">Instances of <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external"><code>Telemetry.Item</code></a> represent an item of data on the drive station console display.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static interface&nbsp;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Line.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Line</a></span></code>
-<div class="block">Instances of <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Line.html" title="interface in org.firstinspires.ftc.robotcore.external"><code>Telemetry.Line</code></a> build lines of data on the driver station telemetry display.</div>
+<div class="block">Instances of <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Line.html" title="interface in org.firstinspires.ftc.robotcore.external"><code>Telemetry.Line</code></a> build lines of data on the driver station console display.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -260,21 +260,21 @@ var activeTableTab = "activeTableTab";
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.Object</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addAction-java.lang.Runnable-">addAction</a></span>(java.lang.Runnable&nbsp;action)</code>
-<div class="block">In addition to items and lines, a telemetry may also contain a list of actions.</div>
+<div class="block">In addition to items and lines, a console may also contain a list of actions.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;<a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-org.firstinspires.ftc.robotcore.external.Func-">addData</a></span>(java.lang.String&nbsp;caption,
        <a href="../../../../../org/firstinspires/ftc/robotcore/external/Func.html" title="interface in org.firstinspires.ftc.robotcore.external">Func</a>&lt;T&gt;&nbsp;valueProducer)</code>
-<div class="block">Adds an item to the end of the telemetry being built for driver station display.</div>
+<div class="block">Adds an item to the end of the console being built for driver station display.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.Object-">addData</a></span>(java.lang.String&nbsp;caption,
        java.lang.Object&nbsp;value)</code>
-<div class="block">Adds an item to the end if the telemetry being built for driver station display.</div>
+<div class="block">Adds an item to the end if the console being built for driver station display.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -282,7 +282,7 @@ var activeTableTab = "activeTableTab";
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.String-org.firstinspires.ftc.robotcore.external.Func-">addData</a></span>(java.lang.String&nbsp;caption,
        java.lang.String&nbsp;format,
        <a href="../../../../../org/firstinspires/ftc/robotcore/external/Func.html" title="interface in org.firstinspires.ftc.robotcore.external">Func</a>&lt;T&gt;&nbsp;valueProducer)</code>
-<div class="block">Adds an item to the end of the telemetry being built for driver station display.</div>
+<div class="block">Adds an item to the end of the console being built for driver station display.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
@@ -290,7 +290,7 @@ var activeTableTab = "activeTableTab";
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#addData-java.lang.String-java.lang.String-java.lang.Object...-">addData</a></span>(java.lang.String&nbsp;caption,
        java.lang.String&nbsp;format,
        java.lang.Object...&nbsp;args)</code>
-<div class="block">Adds an item to the end of the telemetry being built for driver station display.</div>
+<div class="block">Adds an item to the end of the console being built for driver station display.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -358,13 +358,13 @@ var activeTableTab = "activeTableTab";
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#removeItem-org.firstinspires.ftc.robotcore.external.Telemetry.Item-">removeItem</a></span>(<a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a>&nbsp;item)</code>
-<div class="block">Removes an item from the receiver telemetry, if present.</div>
+<div class="block">Removes an item from the receiver console, if present.</div>
 </td>
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#removeLine-org.firstinspires.ftc.robotcore.external.Telemetry.Line-">removeLine</a></span>(<a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Line.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Line</a>&nbsp;line)</code>
-<div class="block">Removes a line from the receiver telemetry, if present.</div>
+<div class="block">Removes a line from the receiver console, if present.</div>
 </td>
 </tr>
 <tr id="i17" class="rowColor">
@@ -420,7 +420,7 @@ var activeTableTab = "activeTableTab";
 <pre><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a>&nbsp;addData(java.lang.String&nbsp;caption,
                        java.lang.String&nbsp;format,
                        java.lang.Object...&nbsp;args)</pre>
-<div class="block">Adds an item to the end of the telemetry being built for driver station display. The value shown
+<div class="block">Adds an item to the end of the console being built for driver station display. The value shown
  will be the result of calling <code>String.format()</code>
  with the indicated format and arguments. The caption and value are shown on the driver station
  separated by the <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#getCaptionValueSeparator--"><code>caption value separator</code></a>. The item
@@ -446,7 +446,7 @@ var activeTableTab = "activeTableTab";
 <h4>addData</h4>
 <pre><a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a>&nbsp;addData(java.lang.String&nbsp;caption,
                        java.lang.Object&nbsp;value)</pre>
-<div class="block">Adds an item to the end if the telemetry being built for driver station display. The value shown
+<div class="block">Adds an item to the end if the console being built for driver station display. The value shown
  will be the result of calling <code>toString()</code> on the provided value
  object. The caption and value are shown on the driver station separated by the <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#getCaptionValueSeparator--"><code>caption value separator</code></a>. The item is removed if <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clear--"><code>clear()</code></a>
  or <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clearAll--"><code>clearAll()</code></a> is called.</div>
@@ -470,7 +470,7 @@ var activeTableTab = "activeTableTab";
 <h4>addData</h4>
 <pre>&lt;T&gt;&nbsp;<a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a>&nbsp;addData(java.lang.String&nbsp;caption,
                            <a href="../../../../../org/firstinspires/ftc/robotcore/external/Func.html" title="interface in org.firstinspires.ftc.robotcore.external">Func</a>&lt;T&gt;&nbsp;valueProducer)</pre>
-<div class="block">Adds an item to the end of the telemetry being built for driver station display. The value shown
+<div class="block">Adds an item to the end of the console being built for driver station display. The value shown
  will be the result of calling <code>toString()</code> on the object which is
  returned from invoking valueProducer.<a href="../../../../../org/firstinspires/ftc/robotcore/external/Func.html#value--"><code>Func.value()</code></a> value()}. The caption and value are
  shown on the driver station separated by the <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#getCaptionValueSeparator--"><code>caption value
@@ -478,7 +478,7 @@ var activeTableTab = "activeTableTab";
  <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clear--"><code>clear()</code></a> is called.
 
  <p>The valueProducer is evaluated only if actual transmission to the driver station
- is to occur. This is important, as it provides a means of displaying telemetry which
+ is to occur. This is important, as it provides a means of displaying console which
  is relatively expensive to evaluate while avoiding computation or delay on evaluations
  which won't be transmitted due to transmission interval throttling.</p></div>
 <dl>
@@ -504,14 +504,14 @@ var activeTableTab = "activeTableTab";
 <pre>&lt;T&gt;&nbsp;<a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a>&nbsp;addData(java.lang.String&nbsp;caption,
                            java.lang.String&nbsp;format,
                            <a href="../../../../../org/firstinspires/ftc/robotcore/external/Func.html" title="interface in org.firstinspires.ftc.robotcore.external">Func</a>&lt;T&gt;&nbsp;valueProducer)</pre>
-<div class="block">Adds an item to the end of the telemetry being built for driver station display. The value shown
+<div class="block">Adds an item to the end of the console being built for driver station display. The value shown
  will be the result of calling <code>String.format(java.lang.String, java.lang.Object...)</code> on the object which is returned from invoking
  valueProducer.<a href="../../../../../org/firstinspires/ftc/robotcore/external/Func.html#value--"><code>Func.value()</code></a> value()}. The caption and value are shown on the driver station
  separated by the <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#getCaptionValueSeparator--"><code>caption value separator</code></a>. The item is removed
  if <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clearAll--"><code>clearAll()</code></a> is called, but <em>not</em> if <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clear--"><code>clear()</code></a> is called.
 
  <p>The valueProducer is evaluated only if actual transmission to the driver station
- is to occur. This is important, as it provides a means of displaying telemetry which
+ is to occur. This is important, as it provides a means of displaying console which
  is relatively expensive to evaluate while avoiding computation or delay on evaluations
  which won't be transmitted due to transmission interval throttling.</p></div>
 <dl>
@@ -535,7 +535,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>removeItem</h4>
 <pre>boolean&nbsp;removeItem(<a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Item.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Item</a>&nbsp;item)</pre>
-<div class="block">Removes an item from the receiver telemetry, if present.</div>
+<div class="block">Removes an item from the receiver console, if present.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>item</code> - the item to remove</dd>
@@ -582,8 +582,8 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>addAction</h4>
 <pre>java.lang.Object&nbsp;addAction(java.lang.Runnable&nbsp;action)</pre>
-<div class="block">In addition to items and lines, a telemetry may also contain a list of actions.
- When the telemetry is to be updated, these actions are evaluated before the telemetry
+<div class="block">In addition to items and lines, a console may also contain a list of actions.
+ When the console is to be updated, these actions are evaluated before the console
  lines are composed just prior to transmission. A typical use of such actions is to
  initialize some state variable, parts of which are subsequently displayed in items.
  This can help avoid needless re-evaluation.
@@ -591,7 +591,7 @@ var activeTableTab = "activeTableTab";
  <p>Actions are cleared with <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#clearAll--"><code>clearAll()</code></a>, and can be removed with <a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.html#removeAction-java.lang.Object-"><code>removeAction()</code></a>.</p></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>action</code> - the action to execute before composing the lines telemetry</dd>
+<dd><code>action</code> - the action to execute before composing the lines console</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a token by which the action can be later removed.</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
@@ -671,7 +671,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>removeLine</h4>
 <pre>boolean&nbsp;removeLine(<a href="../../../../../org/firstinspires/ftc/robotcore/external/Telemetry.Line.html" title="interface in org.firstinspires.ftc.robotcore.external">Telemetry.Line</a>&nbsp;line)</pre>
-<div class="block">Removes a line from the receiver telemetry, if present.</div>
+<div class="block">Removes a line from the receiver console, if present.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>line</code> - the line to be removed</dd>

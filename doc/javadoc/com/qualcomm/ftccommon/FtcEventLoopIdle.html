@@ -260,9 +260,9 @@ extends <a href="../../../com/qualcomm/ftccommon/FtcEventLoopBase.html" title="c
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/qualcomm/ftccommon/FtcEventLoopIdle.html#refreshUserTelemetry-TelemetryMessage-double-">refreshUserTelemetry</a></span>(TelemetryMessage&nbsp;telemetry,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../com/qualcomm/ftccommon/FtcEventLoopIdle.html#refreshUserTelemetry-TelemetryMessage-double-">refreshUserTelemetry</a></span>(TelemetryMessage&nbsp;console,
                     double&nbsp;sInterval)</code>
-<div class="block">Update's the user portion of the driver station screen with the contents of the telemetry object
+<div class="block">Update's the user portion of the driver station screen with the contents of the console object
  here provided if a sufficiently long duration has passed since the last update.</div>
 </td>
 </tr>
@@ -406,14 +406,14 @@ extends <a href="../../../com/qualcomm/ftccommon/FtcEventLoopBase.html" title="c
 <ul class="blockList">
 <li class="blockList">
 <h4>refreshUserTelemetry</h4>
-<pre>public&nbsp;void&nbsp;refreshUserTelemetry(TelemetryMessage&nbsp;telemetry,
+<pre>public&nbsp;void&nbsp;refreshUserTelemetry(TelemetryMessage&nbsp;console,
                                  double&nbsp;sInterval)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../com/qualcomm/robotcore/eventloop/EventLoop.html#refreshUserTelemetry-TelemetryMessage-double-">EventLoop</a></code></span></div>
-<div class="block">Update's the user portion of the driver station screen with the contents of the telemetry object
+<div class="block">Update's the user portion of the driver station screen with the contents of the console object
  here provided if a sufficiently long duration has passed since the last update.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>telemetry</code> - the telemetry object to send</dd>
+<dd><code>console</code> - the console object to send</dd>
 <dd><code>sInterval</code> - the required minimum interval. NaN indicates that a system default interval should be used.</dd>
 </dl>
 </li>

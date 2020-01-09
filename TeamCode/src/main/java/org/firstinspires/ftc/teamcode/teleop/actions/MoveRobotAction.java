@@ -3,39 +3,94 @@ package org.firstinspires.ftc.teamcode.teleop.actions;
 import org.firstinspires.ftc.teamcode.constants.MotorsConstants;
 import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 
-public class MoveRobotAction extends TeleOpAction {
-    public MoveRobotAction(TeleOpBase opMode) {
-        super(opMode);
+
+public class MoveRobotAction {
+    public static class MoveRobotMobilityDriver extends TeleOpAction {
+        public MoveRobotMobilityDriver(TeleOpBase opMode) {
+            super(opMode);
+        }
+
+        @Override
+        void run() {
+            if(Math.abs(gamepad1.left_stick_x) > 0.1 ||
+                    Math.abs(gamepad1.left_stick_y) > 0.1 ||
+                    gamepad1.left_trigger > 0.1 ||
+                    gamepad1.right_trigger > 0.1) {
+                double drive, strafe, spin = 0.0;
+
+                drive = gamepad1.left_stick_x;
+                strafe = -gamepad1.left_stick_y;
+
+
+                if(gamepad1.left_trigger > 0.0)
+                    spin = -gamepad1.left_trigger;
+                if(gamepad1.right_trigger > 0.0)
+                    spin = gamepad1.right_trigger;
+
+
+                double currentSpeed = MotorsConstants.robotMovement.MOVEMENT_SPEED;
+
+                drive *= currentSpeed;
+                strafe *= currentSpeed;
+                spin *= currentSpeed;
+
+                movementController.moveTeleOp(drive, strafe, spin);
+            } else {
+                movementController.stopAll();
+            }
+        }
+
+        @Override
+        void onThreadDestruction() {
+
+        }
     }
 
-    @Override
-    void run() {
-        telemetry.addLine(Float.toString(Math.abs(gamepad1.left_stick_x)));
-        telemetry.addLine(Boolean.toString(gamepad1.left_stick_x > 0.1));
-        telemetry.update();
-        if(Math.abs(gamepad1.left_stick_x) > 0.1 ||
-                Math.abs(gamepad1.left_stick_y) > 0.1 ||
-                gamepad1.left_trigger > 0.1 ||
-                gamepad1.right_trigger > 0.1) {
-            double drive, strafe, spin = 0.0;
+    public static class MoveRobotArmsDriver extends TeleOpAction {
+        public MoveRobotArmsDriver(TeleOpBase opMode) {
+            super(opMode);
+        }
 
-            drive = gamepad1.left_stick_x;
-            strafe = -gamepad1.left_stick_y;
+        @Override
+        void run() {
 
+            if(gamepad2.dpad_up || gamepad2.dpad_down || gamepad2.dpad_left || gamepad2.dpad_right || Math.abs(gamepad2.right_stick_x) > 0.1) {
 
-            if(gamepad1.left_trigger > 0.0)
-                spin = -gamepad1.left_trigger;
-            if(gamepad1.right_trigger > 0.0)
-                spin = gamepad1.right_trigger;
+                double drive = 0, strafe = 0, spin = 0;
 
+                if(gamepad2.dpad_up) {
+                    drive = 0;
+                    strafe = -1;
+                } else if(gamepad2.dpad_down) {
+                    drive = 0;
+                    strafe = 1;
+                } else if(gamepad2.dpad_left) {
+                    drive = -1;
+                    strafe = 0;
+                } else if(gamepad2.dpad_right) {
+                    drive = 1;
+                    strafe = 0;
+                }
 
-            double currentSpeed = MotorsConstants.robotMovement.MOVEMENT_SPEED;
+                drive = -drive;
+                spin = gamepad2.right_stick_x;
 
-            drive *= currentSpeed;
-            strafe *= currentSpeed;
-            spin *= currentSpeed;
+                double currentSpeed = MotorsConstants.robotMovement.MOVEMENT_SPEED_SLOW;
 
-            movementController.moveTeleOp(drive, strafe, spin);
-        } else movementController.stopAll();
+                drive *= currentSpeed;
+                strafe *= currentSpeed;
+                spin *= currentSpeed;
+
+                movementController.moveTeleOp(drive, strafe, spin);
+            } else {
+                movementController.stopAll();
+            }
+        }
+
+        @Override
+        void onThreadDestruction() {
+
+        }
     }
+
 }

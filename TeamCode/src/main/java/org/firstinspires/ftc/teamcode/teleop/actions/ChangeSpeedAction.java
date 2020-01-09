@@ -15,7 +15,12 @@ public class ChangeSpeedAction extends TeleOpAction {
     void run() {
         if(gamepad1.x)
             MotorsConstants.robotMovement.MOVEMENT_SPEED = MOVEMENT_SPEED_SLOW;
-        if(gamepad1.y)
+        if(gamepad1.b)
             MotorsConstants.robotMovement.MOVEMENT_SPEED = MOVEMENT_SPEED_FAST;
+    }
+
+    @Override
+    void onThreadDestruction() {
+
     }
 }

@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.arm.ArmsController;
+import org.firstinspires.ftc.teamcode.arm.IntakeController;
 import org.firstinspires.ftc.teamcode.movement.MovementController;
 
 /**
@@ -15,6 +16,7 @@ public abstract class TeleOpBase extends LinearOpMode {
 
     public MovementController movementController;
     public ArmsController armsController;
+    public IntakeController intakeController;
     protected FtcDashboard dashboard;
     //ArmsController armsController;
 
@@ -24,9 +26,9 @@ public abstract class TeleOpBase extends LinearOpMode {
         movementController = new MovementController(hardwareMap, telemetry,
                 this);
         armsController = new ArmsController(hardwareMap, telemetry, this);
+        intakeController = new IntakeController(hardwareMap, telemetry, this);
         dashboard = FtcDashboard.getInstance();
 
-        telemetry.update();
 
 
         while (!isStarted() && !isStopRequested()) {

@@ -311,7 +311,7 @@ implements <a href="../../../../com/qualcomm/robotcore/eventloop/SyncdDevice.Man
 <tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/qualcomm/robotcore/eventloop/EventLoopManager.html#refreshSystemTelemetryNow--">refreshSystemTelemetryNow</a></span>()</code>
-<div class="block">Forces an immediate refresh of the system telemetry</div>
+<div class="block">Forces an immediate refresh of the system console</div>
 </td>
 </tr>
 <tr id="i19" class="rowColor">
@@ -327,8 +327,8 @@ implements <a href="../../../../com/qualcomm/robotcore/eventloop/SyncdDevice.Man
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/qualcomm/robotcore/eventloop/EventLoopManager.html#sendTelemetryData-TelemetryMessage-">sendTelemetryData</a></span>(TelemetryMessage&nbsp;telemetry)</code>
-<div class="block">Send telemetry data</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../com/qualcomm/robotcore/eventloop/EventLoopManager.html#sendTelemetryData-TelemetryMessage-">sendTelemetryData</a></span>(TelemetryMessage&nbsp;console)</code>
+<div class="block">Send console data</div>
 </td>
 </tr>
 <tr id="i22" class="altColor">
@@ -632,7 +632,7 @@ implements <a href="../../../../com/qualcomm/robotcore/eventloop/SyncdDevice.Man
 <li class="blockList">
 <h4>refreshSystemTelemetryNow</h4>
 <pre>public&nbsp;void&nbsp;refreshSystemTelemetryNow()</pre>
-<div class="block">Forces an immediate refresh of the system telemetry</div>
+<div class="block">Forces an immediate refresh of the system console</div>
 </li>
 </ul>
 <a name="refreshSystemTelemetry--">
@@ -761,13 +761,13 @@ implements <a href="../../../../com/qualcomm/robotcore/eventloop/SyncdDevice.Man
 <ul class="blockList">
 <li class="blockList">
 <h4>sendTelemetryData</h4>
-<pre>public&nbsp;void&nbsp;sendTelemetryData(TelemetryMessage&nbsp;telemetry)</pre>
-<div class="block">Send telemetry data
+<pre>public&nbsp;void&nbsp;sendTelemetryData(TelemetryMessage&nbsp;console)</pre>
+<div class="block">Send console data
  <p>
- Send the telemetry data, and then clear the sent data</div>
+ Send the console data, and then clear the sent data</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>telemetry</code> - telemetry data</dd>
+<dd><code>console</code> - console data</dd>
 </dl>
 </li>
 </ul>

@@ -27,9 +27,9 @@ public class AutonomousVision extends AutonomousBase {
         while(skystonesFound < 2) {
             DetectedObject obj = visionController.getDetection();
             if(obj.objectCode == ObjectCodes.SKYSTONE && obj.widthDelta < 60) {
-                armController.closeBarrier();
+                //armController.closeBarrier();
                 Thread.sleep(500);
-                armController.openBarrier();
+                //armController.openBarrier();
                 skystonesFound++;
                 canDetectSkystone = false;
                 moveStone();

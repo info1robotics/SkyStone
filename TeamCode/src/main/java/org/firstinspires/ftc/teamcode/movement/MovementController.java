@@ -121,9 +121,6 @@ public class MovementController {
 
         while (Math.abs(angleDiff) < Math.abs(angle) && opMode.opModeIsActive()) {
             this.motorsController.setPower(signs.multiply(new Power(speed)));
-            console.addLine(Double.toString(Math.abs(angleDiff)));
-            console.addLine(Double.toString(Math.abs(angle)));
-            console.update();
             angleDiff = getAngleDelta(refAngle);
         }
 

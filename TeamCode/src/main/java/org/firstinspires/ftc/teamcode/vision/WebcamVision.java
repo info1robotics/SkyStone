@@ -84,8 +84,6 @@ public class WebcamVision {
 
 
             }
-            console.addLine(mainObject.getLabel());
-            console.update();
 
             if (mainObject.getLabel().equals(ObjectCodes.SKYSTONE.toString()))
                 return new DetectedObject(ObjectCodes.SKYSTONE, minDeltaWidth);

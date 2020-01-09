@@ -32,7 +32,6 @@ public abstract class AutonomousBase extends LinearOpMode {
         FtcDashboard.getInstance().startCameraStream(visionController.tfod, 0);
 
 
-        telemetry.update();
 
 
         while (!isStarted() && !isStopRequested()) {
