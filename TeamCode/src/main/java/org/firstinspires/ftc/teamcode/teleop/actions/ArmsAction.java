@@ -5,12 +5,12 @@ import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 public class ArmsAction {
 
     public static class ArmsElevation extends IntakeAction {
-        public ArmsElevation(TeleOpBase opMode) {
-            super(opMode);
+        public ArmsElevation(TeleOpBase opMode, boolean useThread) {
+            super(opMode, useThread);
         }
 
         @Override
-        void run() {
+        public void run() {
             if(gamepad2.left_trigger > 0)
                 armsController.arm1Up(gamepad2.left_trigger);
             else if(gamepad2.right_trigger > 0)
@@ -26,12 +26,12 @@ public class ArmsAction {
 
     public static class ArmsMacaraAndPickup extends TeleOpAction {
 
-        public ArmsMacaraAndPickup(TeleOpBase opMode) {
-            super(opMode);
+        public ArmsMacaraAndPickup(TeleOpBase opMode, boolean useThread) {
+            super(opMode, useThread);
         }
 
         @Override
-        void run() {
+        public void run() {
 
             if(gamepad2.right_bumper)
                 armsController.servoMacaraForward();

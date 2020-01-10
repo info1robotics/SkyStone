@@ -25,17 +25,17 @@ public class AutonomousVision extends AutonomousBase {
         int skystonesFound = 0;
         boolean canDetectSkystone = true;
         while(skystonesFound < 2) {
-            DetectedObject obj = visionController.getDetection();
-            if(obj.objectCode == ObjectCodes.SKYSTONE && obj.widthDelta < 60) {
+           // DetectedObject obj = visionController.getDetection();
+            //if(obj.objectCode == ObjectCodes.SKYSTONE && obj.widthDelta < 60) {
                 //armController.closeBarrier();
                 Thread.sleep(500);
                 //armController.openBarrier();
                 skystonesFound++;
                 canDetectSkystone = false;
                 moveStone();
-            } else if(obj.objectCode == ObjectCodes.STONE) {
+            //} else if(obj.objectCode == ObjectCodes.STONE) {
                 canDetectSkystone = true;
-            }
+            //}
             movementController.moveLeftAutonomous(MOVEMENT_SPEED, 10);
         }
         movementController.stopAll();

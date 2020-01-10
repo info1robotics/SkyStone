@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.vision.WebcamVision;
 public abstract class AutonomousBase extends LinearOpMode {
     public MovementController movementController;
     public ArmsController armController;
-    public WebcamVision visionController;
+    //public WebcamVision visionController;
 
 
     private FtcDashboard dashboard;
@@ -27,9 +27,9 @@ public abstract class AutonomousBase extends LinearOpMode {
         movementController = new MovementController(hardwareMap, telemetry,
                 this);
         armController = new ArmsController(hardwareMap, telemetry, this);
-        visionController = new WebcamVision(hardwareMap, dashboardTelemetry);
+        //visionController = new WebcamVision(hardwareMap, dashboardTelemetry);
 
-        FtcDashboard.getInstance().startCameraStream(visionController.tfod, 0);
+        //FtcDashboard.getInstance().startCameraStream(visionController.tfod, 0);
 
 
 

@@ -7,12 +7,12 @@ import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMove
 import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED_SLOW;
 
 public class ChangeSpeedAction extends TeleOpAction {
-    public ChangeSpeedAction(TeleOpBase opMode) {
-        super(opMode);
+    public ChangeSpeedAction(TeleOpBase opMode, boolean useThread) {
+        super(opMode, useThread);
     }
 
     @Override
-    void run() {
+    public void run() {
         if(gamepad1.x)
             MotorsConstants.robotMovement.MOVEMENT_SPEED = MOVEMENT_SPEED_SLOW;
         if(gamepad1.b)

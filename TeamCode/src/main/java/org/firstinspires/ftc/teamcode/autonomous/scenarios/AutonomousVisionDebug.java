@@ -17,7 +17,7 @@ public class AutonomousVisionDebug extends AutonomousBase {
         movementController.moveRightAutonomous(MOVEMENT_SPEED, 18.0);
         movementController.moveBackwardAutonomous(MOVEMENT_SPEED, 42.0);
         while(opModeIsActive()) {
-            visionController.getDetection();
+            //visionController.getDetection();
         }
     }
 }

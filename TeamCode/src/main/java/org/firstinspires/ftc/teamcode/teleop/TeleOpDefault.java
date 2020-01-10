@@ -12,12 +12,12 @@ public class TeleOpDefault extends TeleOpBase {
 
     @Override
     void run() {
-        new ChangeSpeedAction(this);
-        new MoveRobotAction.MoveRobotMobilityDriver(this);
-        new MoveRobotAction.MoveRobotArmsDriver(this);
-        new IntakeAction(this);
-        new ArmsAction.ArmsElevation(this);
-        new ArmsAction.ArmsMacaraAndPickup(this);
+        new ChangeSpeedAction(this, true);
+        new MoveRobotAction.MoveRobotMobilityDriver(this, true);
+        new MoveRobotAction.MoveRobotArmsDriver(this, true);
+        new IntakeAction(this, true);
+        new ArmsAction.ArmsElevation(this, true);
+        new ArmsAction.ArmsMacaraAndPickup(this, true);
     }
 
 }

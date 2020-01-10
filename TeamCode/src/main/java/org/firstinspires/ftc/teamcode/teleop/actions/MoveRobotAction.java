@@ -6,12 +6,12 @@ import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 
 public class MoveRobotAction {
     public static class MoveRobotMobilityDriver extends TeleOpAction {
-        public MoveRobotMobilityDriver(TeleOpBase opMode) {
-            super(opMode);
+        public MoveRobotMobilityDriver(TeleOpBase opMode, boolean useThread) {
+            super(opMode, useThread);
         }
 
         @Override
-        void run() {
+        public void run() {
             if(Math.abs(gamepad1.left_stick_x) > 0.1 ||
                     Math.abs(gamepad1.left_stick_y) > 0.1 ||
                     gamepad1.left_trigger > 0.1 ||
@@ -47,12 +47,12 @@ public class MoveRobotAction {
     }
 
     public static class MoveRobotArmsDriver extends TeleOpAction {
-        public MoveRobotArmsDriver(TeleOpBase opMode) {
-            super(opMode);
+        public MoveRobotArmsDriver(TeleOpBase opMode, boolean useThread) {
+            super(opMode, useThread);
         }
 
         @Override
-        void run() {
+        public void run() {
 
             if(gamepad2.dpad_up || gamepad2.dpad_down || gamepad2.dpad_left || gamepad2.dpad_right || Math.abs(gamepad2.right_stick_x) > 0.1) {
 

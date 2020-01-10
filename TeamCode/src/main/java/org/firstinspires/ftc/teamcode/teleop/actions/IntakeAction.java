@@ -5,13 +5,13 @@ import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 
 public class IntakeAction extends TeleOpAction {
 
-    public IntakeAction(TeleOpBase opMode) {
-        super(opMode);
+    public IntakeAction(TeleOpBase opMode, boolean useThread) {
+        super(opMode, useThread);
 
     }
 
     @Override
-    void run() {
+    public void run() {
         if(gamepad2.y || gamepad1.y) {
             intakeController.runIn(MotorsConstants.intakeMotors.INTAKE_SPEED);
             try {

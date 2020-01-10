@@ -63,13 +63,13 @@ public class MovementMotors {
     public String toString() {
         String res = "";
         res += " fl: ";
-        res += Double.toString(-1.0 * fl.getPower());
+        res += Double.toString(fl.getPower());
         res += " fr: ";
-        res += Double.toString(fr.getPower());
+        res += Double.toString(-1.0 * fr.getPower());
         res += " bl: ";
-        res += Double.toString(-1.0 * bl.getPower());
+        res += Double.toString(bl.getPower());
         res += " br: ";
-        res += Double.toString(br.getPower());
+        res += Double.toString(-1.0 * br.getPower());
         return res;
     }
 

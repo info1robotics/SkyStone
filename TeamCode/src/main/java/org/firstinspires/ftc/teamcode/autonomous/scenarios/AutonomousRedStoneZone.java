@@ -6,10 +6,10 @@ import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
 
 import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED;
 
-@Autonomous(name = "Autonomie Roșu Stone Zone")
+@Autonomous(name = "Autonomie Roșu Stone Zone", group = "Rosu")
 public class AutonomousRedStoneZone extends AutonomousBase {
     public void runCommands() {
-        movementController.moveRightAutonomous(MOVEMENT_SPEED, 92.0);
+        movementController.moveForwardAutonomous(MOVEMENT_SPEED, 50.0);
         movementController.stopAll();
     }
 }

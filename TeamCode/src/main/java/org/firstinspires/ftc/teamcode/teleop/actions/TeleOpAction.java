@@ -8,8 +8,6 @@ import org.firstinspires.ftc.teamcode.arm.IntakeController;
 import org.firstinspires.ftc.teamcode.movement.MovementController;
 import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 
-import java.util.Date;
-
 public abstract class TeleOpAction {
 
     TeleOpBase opMode;
@@ -20,7 +18,8 @@ public abstract class TeleOpAction {
     Gamepad gamepad1, gamepad2;
     Telemetry telemetry;
 
-    public TeleOpAction(TeleOpBase opMode) {
+
+    public TeleOpAction(TeleOpBase opMode, boolean useThread) {
         this.opMode = opMode;
 
         armsController = opMode.armsController;
@@ -30,10 +29,12 @@ public abstract class TeleOpAction {
         gamepad2 = opMode.gamepad2;
         telemetry = opMode.telemetry;
 
-        createThread();
+        if(useThread) {
+            createThread();
+        }
     }
 
-    abstract void run();
+    public abstract void run();
 
     abstract void onThreadDestruction();
 
@@ -43,10 +44,13 @@ public abstract class TeleOpAction {
             public void run() {
                 while(opMode.opModeIsActive()) {
                     TeleOpAction.this.run();
+                    opMode.idle();
                 }
                 onThreadDestruction();
             }
         };
+        attachedThread.setPriority(10);
+        attachedThread.setName(getClass().getSimpleName());
         attachedThread.start();
     }
 }
