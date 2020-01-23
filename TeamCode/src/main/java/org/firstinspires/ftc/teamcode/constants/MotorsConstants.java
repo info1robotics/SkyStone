@@ -9,7 +9,7 @@ public class MotorsConstants {
     public static class robotMovement {
         public static double MOVEMENT_SPEED = 1.0;
         public static double MOVEMENT_SPEED_FAST = 1.0;
-        public static double MOVEMENT_SPEED_SLOW = 0.6;
+        public static double MOVEMENT_SPEED_SLOW = 0.7;
     }
 
     @Config

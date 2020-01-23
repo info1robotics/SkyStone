@@ -6,10 +6,10 @@ import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
 
 import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED;
 
-@Autonomous(name = "Autonomie Roșu Building Zone", group = "Rosu")
+@Autonomous(name = "AUTONOMIE SUPREMA DE PARCARE", group = "Rosu")
 public class AutonomousRedBuildingZone extends AutonomousBase {
-    public void runCommands() {
-        movementController.moveForwardAutonomous(MOVEMENT_SPEED, 50.0);
+    public void runCommands() throws InterruptedException {
+        movementController.moveForwardAutonomous(0.5, 30.0);
         movementController.stopAll();
     }
 }

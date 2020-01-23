@@ -5,12 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.arm.ArmsController;
+import org.firstinspires.ftc.teamcode.arm.IntakeController;
 import org.firstinspires.ftc.teamcode.movement.MovementController;
 import org.firstinspires.ftc.teamcode.vision.WebcamVision;
 
 public abstract class AutonomousBase extends LinearOpMode {
     public MovementController movementController;
     public ArmsController armController;
+    public IntakeController intakeController;
     //public WebcamVision visionController;
 
 
@@ -27,6 +29,7 @@ public abstract class AutonomousBase extends LinearOpMode {
         movementController = new MovementController(hardwareMap, telemetry,
                 this);
         armController = new ArmsController(hardwareMap, telemetry, this);
+        intakeController = new IntakeController(hardwareMap, telemetry, this);
         //visionController = new WebcamVision(hardwareMap, dashboardTelemetry);
 
         //FtcDashboard.getInstance().startCameraStream(visionController.tfod, 0);

@@ -50,7 +50,7 @@ public class MovementMotors {
     }
 
     public boolean isBusy() {
-        return fl.isBusy() || fr.isBusy() || bl.isBusy() || br.isBusy();
+        return fl.isBusy() && fr.isBusy() && bl.isBusy() && br.isBusy();
     }
 
     public void stopAll() {

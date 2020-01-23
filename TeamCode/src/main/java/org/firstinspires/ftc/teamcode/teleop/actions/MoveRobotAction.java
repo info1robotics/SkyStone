@@ -21,6 +21,8 @@ public class MoveRobotAction {
                 drive = gamepad1.left_stick_x;
                 strafe = -gamepad1.left_stick_y;
 
+                if(Math.abs(drive) < 0.1) drive = 0;
+                if(Math.abs(strafe) < 0.1) strafe = 0;
 
                 if(gamepad1.left_trigger > 0.0)
                     spin = -gamepad1.left_trigger;
