@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.autonomous.scenarios;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
+import org.firstinspires.ftc.teamcode.vision.ObjectCodes;
+import org.firstinspires.ftc.teamcode.vision.WebcamVision;
 
 import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.intakeMotors.INTAKE_SPEED;
 import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED;

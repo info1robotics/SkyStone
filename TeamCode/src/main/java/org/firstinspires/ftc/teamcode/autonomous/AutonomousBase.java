@@ -48,7 +48,6 @@ public abstract class AutonomousBase extends LinearOpMode {
             runCommands();
         } catch(InterruptedException e) { }
 
-
     }
 
     public abstract void runCommands() throws InterruptedException;

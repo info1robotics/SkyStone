@@ -11,9 +11,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.constants.MotorsConstants;
+import org.firstinspires.ftc.teamcode.constants.Signs;
 
 public class MovementController {
-    public MovementMotors motorsController;
+    public MovementMotors movementMotors;
     private LinearOpMode opMode;
 
     public BNO055IMU imu;
@@ -22,7 +23,7 @@ public class MovementController {
 
     public MovementController(HardwareMap hardwareMap, Telemetry telemetry,
                               LinearOpMode opMode) {
-        motorsController = new MovementMotors(hardwareMap, telemetry);
+        movementMotors = new MovementMotors(hardwareMap, telemetry);
         imu = hardwareMap.get(BNO055IMU.class,"imu");
 
         this.opMode = opMode;
@@ -39,14 +40,15 @@ public class MovementController {
 
 
     private void moveAutonomous(Power speed, Power direction, double centimeters) {
-        motorsController.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorsController.setTargetPosition((int)(centimeters * MotorsConstants.ticks.TICKS_PER_CENTIMETER), direction);
-        motorsController.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        motorsController.setPower(speed.multiply(direction));
+        movementMotors.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        movementMotors.setTargetPosition((int)(centimeters * MotorsConstants.ticks.TICKS_PER_CENTIMETER), direction);
+        movementMotors.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movementMotors.setPower(speed.multiply(direction));
 
-        while(motorsController.isBusy() && opMode.opModeIsActive()) {
+        while(movementMotors.isBusy() && opMode.opModeIsActive()) {
             opMode.idle();
         }
+
 
     }
 
@@ -73,7 +75,7 @@ public class MovementController {
         );
 
         movementPower = normalizePower(movementPower);
-        motorsController.setPower(movementPower);
+        movementMotors.setPower(movementPower);
 
     }
 
@@ -94,7 +96,7 @@ public class MovementController {
     }
 
     public void stopAll() {
-        motorsController.stopAll();
+        movementMotors.stopAll();
     }
 
     Orientation getGyroAngle() {
@@ -107,23 +109,5 @@ public class MovementController {
         while (deltaAngle < -180) deltaAngle += 360;
         while (deltaAngle > 180) deltaAngle -= 360;
         return deltaAngle;
-    }
-
-    public void spinAutonomous(double speed, double angle) {
-        Power signs;
-
-        if (angle < 0) signs = Signs.SPIN_LEFT;
-        else signs = Signs.SPIN_RIGHT;
-        this.motorsController.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-        Orientation refAngle = new Orientation();
-        double angleDiff = getAngleDelta(refAngle);
-
-        while (Math.abs(angleDiff) < Math.abs(angle) && opMode.opModeIsActive()) {
-            this.motorsController.setPower(signs.multiply(new Power(speed)));
-            angleDiff = getAngleDelta(refAngle);
-        }
-
-        this.stopAll();
     }
 }
