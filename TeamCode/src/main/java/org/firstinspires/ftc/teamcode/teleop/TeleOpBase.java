@@ -17,7 +17,7 @@ public abstract class TeleOpBase extends LinearOpMode {
     public MovementController movementController;
     public ArmsController armsController;
     public IntakeController intakeController;
-    protected FtcDashboard dashboard;
+    public FtcDashboard dashboard;
     //ArmsController armsController;
 
     @Override
@@ -45,7 +45,7 @@ public abstract class TeleOpBase extends LinearOpMode {
 
     }
 
-    abstract void run();
+    public abstract void run();
 
 
 }

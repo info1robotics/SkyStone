@@ -8,7 +8,7 @@ public class TeleOpFieldTest extends TeleOpBase {
 
 
     @Override
-    void run() {
+    public void run() {
 
         double[] xPoints = new double[]{0, 75, 5}, yPoints = new double[]{0, 75, 3};
 

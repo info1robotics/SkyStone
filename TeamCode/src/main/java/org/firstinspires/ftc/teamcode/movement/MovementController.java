@@ -52,6 +52,20 @@ public class MovementController {
 
     }
 
+
+    private void moveAutonomous(Power speed, Power direction, int ticks) {
+        movementMotors.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        movementMotors.setTargetPosition(ticks, direction);
+        movementMotors.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        movementMotors.setPower(speed.multiply(direction));
+
+        while(movementMotors.isBusy() && opMode.opModeIsActive()) {
+            opMode.idle();
+        }
+
+
+    }
+
     public Power normalizePower(Power power) {
         double fl = power.fl, fr = power.fr, bl = power.bl, br = power.br;
         double max = Math.max(
@@ -95,19 +109,13 @@ public class MovementController {
         moveAutonomous(new Power(speed), Signs.RIGHT, centimeters);
     }
 
+    @Deprecated
+    public void move100Ticks() {
+        moveAutonomous(new Power(1.0), Signs.FORWARD, 1000);
+    }
+
     public void stopAll() {
         movementMotors.stopAll();
     }
 
-    Orientation getGyroAngle() {
-        return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-    }
-
-    private double getAngleDelta(Orientation angle) {
-        Orientation angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-        double deltaAngle = angles.firstAngle - angle.firstAngle;
-        while (deltaAngle < -180) deltaAngle += 360;
-        while (deltaAngle > 180) deltaAngle -= 360;
-        return deltaAngle;
-    }
 }

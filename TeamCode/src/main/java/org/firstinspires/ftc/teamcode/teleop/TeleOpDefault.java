@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.teleop.actions.MoveRobotAction;
 public class TeleOpDefault extends TeleOpBase {
 
     @Override
-    void run() {
+    public void run() {
         new ChangeSpeedAction(this, true);
         new MoveRobotAction.MoveRobotMobilityDriver(this, true);
         new MoveRobotAction.MoveRobotArmsDriver(this, true);
