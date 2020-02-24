@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
 
-import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED;
+import static org.firstinspires.ftc.teamcode.constants.AppConstants.robotMovement.MOVEMENT_SPEED;
 
 @Autonomous(name = "Autonomie Albastru Building Zone", group = "Albastru")
 public class AutonomousBlueBuildingZone extends AutonomousBase {

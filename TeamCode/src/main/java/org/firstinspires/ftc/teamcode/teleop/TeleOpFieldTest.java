@@ -8,7 +8,7 @@ public class TeleOpFieldTest extends TeleOpBase {
 
 
     @Override
-    public void run() {
+    public void initActions() {
 
         double[] xPoints = new double[]{0, 75, 5}, yPoints = new double[]{0, 75, 3};
 
@@ -19,5 +19,10 @@ public class TeleOpFieldTest extends TeleOpBase {
                 .setFill("red")
                 .strokePolyline(xPoints, yPoints);
         dashboard.sendTelemetryPacket(packet);
+    }
+
+    @Override
+    public void runLoop() {
+
     }
 }

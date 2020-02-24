@@ -4,8 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
 
-import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED;
-import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED_SLOW;
+import static org.firstinspires.ftc.teamcode.constants.AppConstants.robotMovement.MOVEMENT_SPEED_SLOW;
 
 @Autonomous(name = "ACEASTA AUTONOMIE CU ROBOT MERGAND INTAI SPRE STANGA")
 public class AutonomousUseThisLeft extends AutonomousBase {

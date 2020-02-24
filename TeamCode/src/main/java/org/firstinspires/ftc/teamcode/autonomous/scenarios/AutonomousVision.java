@@ -3,10 +3,8 @@ package org.firstinspires.ftc.teamcode.autonomous.scenarios;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
-import org.firstinspires.ftc.teamcode.vision.DetectedObject;
-import org.firstinspires.ftc.teamcode.vision.ObjectCodes;
 
-import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED;
+import static org.firstinspires.ftc.teamcode.constants.AppConstants.robotMovement.MOVEMENT_SPEED;
 
 /*
  * This sample demonstrates how to stream frames from Vuforia to the dashboard. Make sure to fill in
@@ -25,7 +23,7 @@ public class AutonomousVision extends AutonomousBase {
         int skystonesFound = 0;
         boolean canDetectSkystone = true;
         while(skystonesFound < 2) {
-           // DetectedObject obj = visionController.getDetection();
+           // DetectedObject obj = visionController.getFrontDetection();
             //if(obj.objectCode == ObjectCodes.SKYSTONE && obj.widthDelta < 60) {
                 //armController.closeBarrier();
                 Thread.sleep(500);

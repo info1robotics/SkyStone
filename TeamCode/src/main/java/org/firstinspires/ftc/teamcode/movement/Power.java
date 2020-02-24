@@ -1,5 +1,9 @@
 package org.firstinspires.ftc.teamcode.movement;
 
+/**
+ * This class is a wrapper for the powers of the wheels' motors:
+ * front-left, front-right, back-left, back-right
+ */
 public class Power {
 
     public double fl, fr, bl, br;
@@ -76,4 +80,7 @@ public class Power {
     }
 
 
+    public boolean lessThan(Power other) {
+        return fl < other.fl && fr < other.fr && bl < other.bl && br < other.br;
+    }
 }

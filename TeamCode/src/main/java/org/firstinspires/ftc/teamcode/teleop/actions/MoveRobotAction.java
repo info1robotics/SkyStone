@@ -1,13 +1,18 @@
 package org.firstinspires.ftc.teamcode.teleop.actions;
 
-import org.firstinspires.ftc.teamcode.constants.MotorsConstants;
+import org.firstinspires.ftc.teamcode.constants.AppConstants;
 import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 
 
 public class MoveRobotAction {
+
+    /**
+     * <i>Action</i> class which defines and listens for movement
+     * commands triggered by the main driver's gamepad.
+     */
     public static class MoveRobotMobilityDriver extends TeleOpAction {
         public MoveRobotMobilityDriver(TeleOpBase opMode, boolean useThread) {
-            super(opMode, useThread);
+            super(opMode);
         }
 
         @Override
@@ -19,7 +24,7 @@ public class MoveRobotAction {
                 double drive, strafe, spin = 0.0;
 
                 drive = gamepad1.left_stick_x;
-                strafe = -gamepad1.left_stick_y;
+                strafe = gamepad1.left_stick_y;
 
                 if(Math.abs(drive) < 0.1) drive = 0;
                 if(Math.abs(strafe) < 0.1) strafe = 0;
@@ -30,7 +35,7 @@ public class MoveRobotAction {
                     spin = gamepad1.right_trigger;
 
 
-                double currentSpeed = MotorsConstants.robotMovement.MOVEMENT_SPEED;
+                double currentSpeed = AppConstants.robotMovement.MOVEMENT_SPEED;
 
                 drive *= currentSpeed;
                 strafe *= currentSpeed;
@@ -38,6 +43,16 @@ public class MoveRobotAction {
 
                 movementController.moveTeleOp(drive, strafe, spin);
             } else {
+                telemetry.addData("FUYUUUUCUUCUC", "FUKC");
+                telemetry.update();
+                telemetry.addData("FUYUUUUCUUCUC", "FUKC");
+                telemetry.update();
+                telemetry.addData("FUYUUUUCUUCUC", "FUKC");
+                telemetry.update();
+                telemetry.addData("FUYUUUUCUUCUC", "FUKC");
+                telemetry.update();
+                telemetry.addData("FUYUUUUCUUCUC", "FUKC");
+                telemetry.update();
                 movementController.stopAll();
             }
         }
@@ -48,9 +63,14 @@ public class MoveRobotAction {
         }
     }
 
+    /**
+     * <i>Action</i> class which defines and listens for movement
+     * commands triggered by the arm driver's gamepad. It's much a more precise
+     * than the main driver's movement but it's slower.
+     */
     public static class MoveRobotArmsDriver extends TeleOpAction {
-        public MoveRobotArmsDriver(TeleOpBase opMode, boolean useThread) {
-            super(opMode, useThread);
+        public MoveRobotArmsDriver(TeleOpBase opMode) {
+            super(opMode);
         }
 
         @Override
@@ -62,10 +82,10 @@ public class MoveRobotAction {
 
                 if(gamepad2.dpad_up) {
                     drive = 0;
-                    strafe = -1;
+                    strafe = 1;
                 } else if(gamepad2.dpad_down) {
                     drive = 0;
-                    strafe = 1;
+                    strafe = -1;
                 } else if(gamepad2.dpad_left) {
                     drive = -1;
                     strafe = 0;
@@ -77,7 +97,7 @@ public class MoveRobotAction {
                 drive = -drive;
                 spin = gamepad2.right_stick_x;
 
-                double currentSpeed = MotorsConstants.robotMovement.MOVEMENT_SPEED_SLOW;
+                double currentSpeed = AppConstants.robotMovement.MOVEMENT_SPEED_SLOW;
 
                 drive *= currentSpeed;
                 strafe *= currentSpeed;

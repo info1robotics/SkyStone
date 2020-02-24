@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.constants;
 
-import org.firstinspires.ftc.teamcode.autonomous.interpolation.Point;
+import org.firstinspires.ftc.teamcode.odometry.Point;
 
 public class AutonomyPoints {
     public static Point[] best = new Point[]{

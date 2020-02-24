@@ -1,22 +1,27 @@
 package org.firstinspires.ftc.teamcode.teleop.actions;
 
-import org.firstinspires.ftc.teamcode.constants.MotorsConstants;
+import org.firstinspires.ftc.teamcode.constants.AppConstants;
 import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 
-import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED_FAST;
-import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED_SLOW;
+import static org.firstinspires.ftc.teamcode.constants.AppConstants.robotMovement.MOVEMENT_SPEED_FAST;
+import static org.firstinspires.ftc.teamcode.constants.AppConstants.robotMovement.MOVEMENT_SPEED_SLOW;
 
+
+/**
+ * <i>Action</i> class which listens for the x and b buttons, which change the
+ * robot's movement speed.
+ */
 public class ChangeSpeedAction extends TeleOpAction {
-    public ChangeSpeedAction(TeleOpBase opMode, boolean useThread) {
-        super(opMode, useThread);
+    public ChangeSpeedAction(TeleOpBase opMode) {
+        super(opMode);
     }
 
     @Override
     public void run() {
         if(gamepad1.x)
-            MotorsConstants.robotMovement.MOVEMENT_SPEED = MOVEMENT_SPEED_SLOW;
+            AppConstants.robotMovement.MOVEMENT_SPEED = MOVEMENT_SPEED_SLOW;
         if(gamepad1.b)
-            MotorsConstants.robotMovement.MOVEMENT_SPEED = MOVEMENT_SPEED_FAST;
+            AppConstants.robotMovement.MOVEMENT_SPEED = MOVEMENT_SPEED_FAST;
     }
 
     @Override

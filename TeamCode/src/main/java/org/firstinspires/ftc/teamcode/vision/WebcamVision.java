@@ -11,6 +11,9 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 import org.firstinspires.ftc.teamcode.R;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class WebcamVision {
@@ -30,6 +33,8 @@ public class WebcamVision {
 
     private VuforiaLocalizer vuforia;
     public TFObjectDetector tfod;
+    public FtcDashboard dashboard;
+    private Telemetry dashboardTelemetry;
 
     public WebcamVision(HardwareMap hardwareMap, Telemetry console) {
         VuforiaLocalizer.Parameters vuforiaParams = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
@@ -50,23 +55,28 @@ public class WebcamVision {
             tfod.activate();
         }
 
+        dashboard = FtcDashboard.getInstance();
+        dashboard.startCameraStream(tfod, 0);
+
         this.console = console;
+        dashboardTelemetry = dashboard.getTelemetry();;
 
 
     }
 
 
 
-    public DetectedObject getDetection() {
+    public DetectedObject getFrontDetection() {
         if (tfod != null) {
             List<Recognition> recognitions = tfod.getRecognitions();
             if (recognitions == null || recognitions.size() == 0) {
-                return new DetectedObject(ObjectCodes.NO_OBJECT, 0);
+                return new DetectedObject(ObjectCodes.NO_OBJECT, -1, -1);
             }
 
             Recognition mainObject = null;
 
             int minDeltaWidth = 10000;
+            float xCenter = 0, yCenter = 0;
 
             for (Recognition r: recognitions) {
                 int deltaWidth = (int)Math.abs((r.getImageWidth() / 2) - ((r.getLeft() + r.getRight()) / 2));
@@ -80,17 +90,52 @@ public class WebcamVision {
                 if (minDeltaWidth > deltaWidth) {
                     minDeltaWidth = deltaWidth;
                     mainObject = r;
+                    xCenter = (r.getLeft() + r.getRight()) / 2;
+                    yCenter = (r.getBottom() + r.getTop()) / 2;
                 }
 
 
             }
 
             if (mainObject.getLabel().equals(ObjectCodes.SKYSTONE.toString()))
-                return new DetectedObject(ObjectCodes.SKYSTONE, minDeltaWidth);
+                return new DetectedObject(ObjectCodes.SKYSTONE, xCenter, yCenter);
             if (mainObject.getLabel().equals(ObjectCodes.STONE.toString()))
-                return new DetectedObject(ObjectCodes.STONE, minDeltaWidth);
+                return new DetectedObject(ObjectCodes.STONE, xCenter, yCenter);
 
         }
-        return new DetectedObject(ObjectCodes.NO_OBJECT, 0);
+        return new DetectedObject(ObjectCodes.NO_OBJECT, -1, -1);
     }
+
+    public ArrayList<DetectedObject> getAllDetections() {
+        if (tfod != null) {
+            ArrayList<DetectedObject> detectedObjects = new ArrayList<>();
+            List<Recognition> recognitions = tfod.getRecognitions();
+            if (recognitions == null || recognitions.size() == 0) {
+                return new ArrayList<>();
+            }
+
+            for (Recognition r: recognitions) {
+                detectedObjects.add(
+                        new DetectedObject(
+                                ObjectCodes.valueOf(r.getLabel()),
+                                (r.getLeft() + r.getRight()) / 2,
+                                (r.getBottom() + r.getTop()) / 2
+                        )
+                );
+
+            }
+
+            Collections.sort(detectedObjects, new Comparator<DetectedObject>() {
+                @Override
+                public int compare(DetectedObject o1, DetectedObject o2) {
+                    return (int)(o1.xCenter - o2.xCenter);
+                }
+            });
+
+            return detectedObjects;
+        }
+
+        return new ArrayList<>();
+    }
+
 }

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.autonomous.interpolation;
+package org.firstinspires.ftc.teamcode.odometry;
 
 public class Point {
     public double x;

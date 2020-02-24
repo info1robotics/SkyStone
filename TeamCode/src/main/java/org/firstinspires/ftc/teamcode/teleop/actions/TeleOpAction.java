@@ -8,6 +8,11 @@ import org.firstinspires.ftc.teamcode.arm.IntakeController;
 import org.firstinspires.ftc.teamcode.movement.MovementController;
 import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 
+/**
+ * Classes extended from here listen for gamepad input, each on a separate
+ * thread, and trigger the corresponding actions. I'll call them <i>action</i>
+ * classes.
+ */
 public abstract class TeleOpAction {
 
     TeleOpBase opMode;
@@ -19,7 +24,7 @@ public abstract class TeleOpAction {
     Telemetry telemetry;
 
 
-    public TeleOpAction(TeleOpBase opMode, boolean useThread) {
+    public TeleOpAction(TeleOpBase opMode) {
         this.opMode = opMode;
 
         armsController = opMode.armsController;
@@ -29,15 +34,24 @@ public abstract class TeleOpAction {
         gamepad2 = opMode.gamepad2;
         telemetry = opMode.telemetry;
 
-        if(useThread) {
-            createThread();
-        }
+        createThread();
     }
 
+    /**
+     * Abstract method where we check for gamepad input.
+     */
     public abstract void run();
 
+
+    /**
+     * Abstract method for cleanup on exiting the opMode.
+     * e.g.: Stopping the intake's motors.
+     */
     abstract void onThreadDestruction();
 
+    /**
+     * Creates the thread where we listen for gamepad input.
+     */
     private void createThread() {
         attachedThread = new Thread() {
             @Override
@@ -49,6 +63,7 @@ public abstract class TeleOpAction {
                 onThreadDestruction();
             }
         };
+
         attachedThread.setPriority(10);
         attachedThread.setName(getClass().getSimpleName());
         attachedThread.start();

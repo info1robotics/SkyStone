@@ -8,8 +8,8 @@ import org.firstinspires.ftc.teamcode.arm.IntakeController;
 import org.firstinspires.ftc.teamcode.movement.MovementController;
 
 /**
- * Class which listens for controller input and calls the correct
- * method in the Utilities class to perform the action.
+ * Abstract class which is our base TeleOp mode.
+ * Initialises all <i>controller</i> classes for controlling our robot
  */
 
 public abstract class TeleOpBase extends LinearOpMode {
@@ -18,6 +18,8 @@ public abstract class TeleOpBase extends LinearOpMode {
     public ArmsController armsController;
     public IntakeController intakeController;
     public FtcDashboard dashboard;
+//    public WebcamVision webcamVision;
+
     //ArmsController armsController;
 
     @Override
@@ -27,6 +29,7 @@ public abstract class TeleOpBase extends LinearOpMode {
                 this);
         armsController = new ArmsController(hardwareMap, telemetry, this);
         intakeController = new IntakeController(hardwareMap, telemetry, this);
+//        webcamVision = new WebcamVision(hardwareMap, telemetry);
         dashboard = FtcDashboard.getInstance();
 
 
@@ -39,13 +42,16 @@ public abstract class TeleOpBase extends LinearOpMode {
         }
 
 
-        run();
+        initActions();
 
-        while(opModeIsActive());
+        while(opModeIsActive()) {
+            runLoop();
+        }
 
     }
 
-    public abstract void run();
+    public abstract void initActions();
 
+    public abstract void runLoop();
 
 }

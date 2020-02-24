@@ -6,8 +6,17 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
+/**
+ * This is a basic class which synchronises the movement of motors
+ * Supports:
+ *     -> Setting RunMode
+ *     -> Setting target (in encoder ticks)
+ *     -> Setting power of motors
+ *     -> Checking if they are busy
+ *     -> Easy telemetry output using the toString() method
+ */
 public class MovementMotors {
-    private DcMotor fl, fr, bl, br;
+    public DcMotor fl, fr, bl, br;
     private Telemetry console;
 
     public MovementMotors(HardwareMap hardwareMap, Telemetry telemetry) {
@@ -28,6 +37,11 @@ public class MovementMotors {
 
     }
 
+    /**
+     * Changes the powers of the wheels' motors.
+     * @param power Power to supply to motor.
+     */
+
     public void setPower(Power power) {
         fl.setPower(power.fl);
         fr.setPower(-1.0 * power.fr);
@@ -35,6 +49,10 @@ public class MovementMotors {
         br.setPower(-1.0 * power.br);
     }
 
+    /**
+     * Changes the RunMode of the wheels' motors.
+     * @param runMode RunMode to be set.
+     */
     public void setMode(DcMotor.RunMode runMode) {
         fl.setMode(runMode);
         fr.setMode(runMode);
@@ -42,6 +60,11 @@ public class MovementMotors {
         br.setMode(runMode);
     }
 
+    /**
+     * Changes the target of the wheels' motors.
+     * @param position No. of ticks to target.
+     * @param direction Direction the robot must go in to reach the target.
+     */
     public void setTargetPosition(int position, Power direction) {
         fl.setTargetPosition((int)(direction.fl * position));
         fr.setTargetPosition((int)(-1.0 * direction.fr * position));
@@ -49,10 +72,17 @@ public class MovementMotors {
         br.setTargetPosition((int)(-1.0 * direction.br * position));
     }
 
+    /**
+     * @return Returns true if at least a motor reached the target position.
+     */
     public boolean isBusy() {
         return fl.isBusy() && fr.isBusy() && bl.isBusy() && br.isBusy();
     }
 
+
+    /**
+     * Stops the wheels' motors.
+     */
     public void stopAll() {
         fl.setPower(0);
         fr.setPower(0);
@@ -60,6 +90,11 @@ public class MovementMotors {
         br.setPower(0);
     }
 
+
+    /**
+     * @return Returns a string containing the current powers of
+     * the wheels' motors.
+     */
     public String toString() {
         String res = "";
         res += " fl: ";

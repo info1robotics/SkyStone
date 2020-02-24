@@ -14,12 +14,12 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
     //Odometry wheels
     private DcMotor verticalEncoderLeft, verticalEncoderRight, horizontalEncoder;
 
-    //Thead run condition
+    //Thead initActions condition
     private boolean isRunning = true;
 
     //Position variables used for storage and calculations
     double verticalRightEncoderWheelPosition = 0, verticalLeftEncoderWheelPosition = 0, normalEncoderWheelPosition = 0,  changeInRobotOrientation = 0;
-    private double robotGlobalXCoordinatePosition = 0, robotGlobalYCoordinatePosition = 0, robotOrientationRadians = 0;
+    public double worldXPosition = 0, worldYPosition = 0, worldAngleRadians = 0;
     private double previousVerticalRightEncoderWheelPosition = 0, previousVerticalLeftEncoderWheelPosition = 0, prevNormalEncoderWheelPosition = 0;
 
     //Algorithm constants
@@ -44,13 +44,22 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
      * @param horizontalEncoder horizontal odometry encoder, perpendicular to the other two odometry encoder wheels
      * @param threadSleepDelay delay in milliseconds for the GlobalPositionUpdate thread (50-75 milliseconds is suggested)
      */
-    public OdometryGlobalCoordinatePosition(DcMotor verticalEncoderLeft, DcMotor verticalEncoderRight, DcMotor horizontalEncoder, double COUNTS_PER_INCH, int threadSleepDelay){
+    public OdometryGlobalCoordinatePosition(DcMotor verticalEncoderLeft, DcMotor verticalEncoderRight, DcMotor horizontalEncoder, double COUNTS_PER_CENTIMETER, int threadSleepDelay){
         this.verticalEncoderLeft = verticalEncoderLeft;
         this.verticalEncoderRight = verticalEncoderRight;
         this.horizontalEncoder = horizontalEncoder;
         sleepTime = threadSleepDelay;
 
-        robotEncoderWheelDistance = Double.parseDouble(ReadWriteFile.readFile(wheelBaseSeparationFile).trim()) * COUNTS_PER_INCH;
+        verticalEncoderLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        verticalEncoderRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        horizontalEncoder.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+
+        verticalEncoderLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        verticalEncoderRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        horizontalEncoder.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        robotEncoderWheelDistance = Double.parseDouble(ReadWriteFile.readFile(wheelBaseSeparationFile).trim()) * COUNTS_PER_CENTIMETER;
         this.horizontalEncoderTickPerDegreeOffset = Double.parseDouble(ReadWriteFile.readFile(horizontalTickOffsetFile).trim());
 
     }
@@ -68,7 +77,7 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
 
         //Calculate Angle
         changeInRobotOrientation = (leftChange - rightChange) / (robotEncoderWheelDistance);
-        robotOrientationRadians = ((robotOrientationRadians + changeInRobotOrientation));
+        worldAngleRadians = ((worldAngleRadians + changeInRobotOrientation));
 
         //Get the components of the motion
         normalEncoderWheelPosition = (horizontalEncoder.getCurrentPosition()*normalEncoderPositionMultiplier);
@@ -79,8 +88,8 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
         double n = horizontalChange;
 
         //Calculate and update the position values
-        robotGlobalXCoordinatePosition = robotGlobalXCoordinatePosition + (p*Math.sin(robotOrientationRadians) + n*Math.cos(robotOrientationRadians));
-        robotGlobalYCoordinatePosition = robotGlobalYCoordinatePosition + (p*Math.cos(robotOrientationRadians) - n*Math.sin(robotOrientationRadians));
+        worldXPosition = worldXPosition + (p*Math.sin(worldAngleRadians) + n*Math.cos(worldAngleRadians));
+        worldYPosition = worldYPosition + (p*Math.cos(worldAngleRadians) - n*Math.sin(worldAngleRadians));
 
         previousVerticalLeftEncoderWheelPosition = verticalLeftEncoderWheelPosition;
         previousVerticalRightEncoderWheelPosition = verticalRightEncoderWheelPosition;
@@ -88,22 +97,10 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
     }
 
     /**
-     * Returns the robot's global x coordinate
-     * @return global x coordinate
-     */
-    public double returnXCoordinate(){ return robotGlobalXCoordinatePosition; }
-
-    /**
-     * Returns the robot's global y coordinate
-     * @return global y coordinate
-     */
-    public double returnYCoordinate(){ return robotGlobalYCoordinatePosition; }
-
-    /**
      * Returns the robot's global orientation
      * @return global orientation, in degrees
      */
-    public double returnOrientation(){ return Math.toDegrees(robotOrientationRadians) % 360; }
+    public double returnOrientation(){ return Math.toDegrees(worldAngleRadians) % 360; }
 
     /**
      * Stops the position update thread

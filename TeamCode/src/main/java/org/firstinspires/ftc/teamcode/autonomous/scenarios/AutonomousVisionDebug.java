@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.autonomous.scenarios;
 
 import org.firstinspires.ftc.teamcode.autonomous.AutonomousBase;
 
-import static org.firstinspires.ftc.teamcode.constants.MotorsConstants.robotMovement.MOVEMENT_SPEED;
+import static org.firstinspires.ftc.teamcode.constants.AppConstants.robotMovement.MOVEMENT_SPEED;
 
 /*
  * This sample demonstrates how to stream frames from Vuforia to the dashboard. Make sure to fill in
@@ -17,7 +17,7 @@ public class AutonomousVisionDebug extends AutonomousBase {
         movementController.moveRightAutonomous(MOVEMENT_SPEED, 18.0);
         movementController.moveBackwardAutonomous(MOVEMENT_SPEED, 42.0);
         while(opModeIsActive()) {
-            //visionController.getDetection();
+            //visionController.getFrontDetection();
         }
     }
 }

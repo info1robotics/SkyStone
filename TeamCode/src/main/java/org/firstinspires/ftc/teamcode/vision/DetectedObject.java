@@ -2,10 +2,16 @@ package org.firstinspires.ftc.teamcode.vision;
 
 public class DetectedObject {
     public ObjectCodes objectCode;
-    public int widthDelta;
+    public float xCenter;
+    public float yCenter;
 
-    public DetectedObject(ObjectCodes objectCode, int widthDelta) {
+    public DetectedObject(ObjectCodes objectCode, float xCenter, float yCenter) {
         this.objectCode = objectCode;
-        this.widthDelta = widthDelta;
+        this.xCenter = xCenter;
+        this.yCenter = yCenter;
+    }
+
+    public String toString() {
+        return objectCode.toString() + " " + xCenter + " " + yCenter;
     }
 }

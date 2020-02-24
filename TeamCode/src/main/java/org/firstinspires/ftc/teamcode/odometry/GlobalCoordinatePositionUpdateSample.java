@@ -1,16 +1,15 @@
 package org.firstinspires.ftc.teamcode.odometry;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.odometry.OdometryGlobalCoordinatePosition;
 import org.firstinspires.ftc.teamcode.teleop.TeleOpBase;
 import org.firstinspires.ftc.teamcode.teleop.actions.ArmsAction;
 import org.firstinspires.ftc.teamcode.teleop.actions.ChangeSpeedAction;
 import org.firstinspires.ftc.teamcode.teleop.actions.IntakeAction;
 import org.firstinspires.ftc.teamcode.teleop.actions.MoveRobotAction;
+
+import static org.firstinspires.ftc.teamcode.constants.AppConstants.odometry.COUNTS_PER_CENTIMETER;
 
 /**
  * Created by Sarthak on 6/1/2019.
@@ -29,7 +28,7 @@ public class GlobalCoordinatePositionUpdateSample extends TeleOpBase {
     String rfName = "motorFR", rbName = "motorBR", lfName = "motorFL", lbName = "motorBL";
     String verticalLeftEncoderName = rbName, verticalRightEncoderName = lfName, horizontalEncoderName = rfName;
     @Override
-    public void run() {
+    public void initActions() {
 
         //Assign the hardware map to the odometry wheels
         verticalLeft = hardwareMap.dcMotor.get(verticalLeftEncoderName);
@@ -68,18 +67,18 @@ public class GlobalCoordinatePositionUpdateSample extends TeleOpBase {
         Thread positionThread = new Thread(globalPositionUpdate);
         positionThread.start();
 
-        new ChangeSpeedAction(this, true);
+        new ChangeSpeedAction(this);
         new MoveRobotAction.MoveRobotMobilityDriver(this, true);
-        new MoveRobotAction.MoveRobotArmsDriver(this, true);
-        new IntakeAction(this, true);
-        new ArmsAction.ArmsElevation(this, true);
-        new ArmsAction.ArmsMacaraAndPickup(this, true);
-
+        new MoveRobotAction.MoveRobotArmsDriver(this);
+        new IntakeAction(this);
+        new ArmsAction.ArmsElevation(this);
+        new ArmsAction.ArmsMacaraAndPickup(this);
+//        new OdometryCoordinateTestAction(this);
         globalPositionUpdate.reverseRightEncoder();
         while(opModeIsActive()){
             //Display Global (x, y, theta) coordinates
-            telemetry.addData("X Position", globalPositionUpdate.returnXCoordinate() / COUNTS_PER_INCH);
-            telemetry.addData("Y Position", globalPositionUpdate.returnYCoordinate() / COUNTS_PER_INCH);
+            telemetry.addData("X Position", globalPositionUpdate.worldXPosition / COUNTS_PER_CENTIMETER);
+            telemetry.addData("Y Position", globalPositionUpdate.worldYPosition / COUNTS_PER_CENTIMETER);
             telemetry.addData("Orientation (Degrees)", globalPositionUpdate.returnOrientation());
             telemetry.addData("Vertical Left Position", verticalLeft.getCurrentPosition());
             telemetry.addData("Vertical Right Position", verticalRight.getCurrentPosition());
@@ -90,5 +89,10 @@ public class GlobalCoordinatePositionUpdateSample extends TeleOpBase {
 
         //Stop the thread
         globalPositionUpdate.stop();
+    }
+
+    @Override
+    public void runLoop() {
+
     }
 }

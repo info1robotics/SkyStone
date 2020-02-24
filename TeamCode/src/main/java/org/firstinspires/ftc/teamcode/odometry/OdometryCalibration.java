@@ -5,7 +5,6 @@ import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.ReadWriteFile;
 
@@ -16,7 +15,7 @@ import java.io.File;
 /**
  * Created by Sarthak on 6/1/2019.
  * Odometry system calibration. Run this OpMode to generate the necessary constants to calculate the robot's global position on the field.
- * The Global Positioning Algorithm will not function and will throw an error if this program is not run first
+ * The Global Positioning Algorithm will not function and will throw an error if this program is not initActions first
  */
 @TeleOp(name = "Odometry System Calibration", group = "Calibration")
 public class OdometryCalibration extends LinearOpMode {
@@ -62,6 +61,7 @@ public class OdometryCalibration extends LinearOpMode {
         parameters.loggingTag          = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
         imu.initialize(parameters);
+//        BNO055IMU.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN)
         telemetry.addData("Odometry System Calibration Status", "IMU Init Complete");
         telemetry.clear();
 
@@ -73,17 +73,21 @@ public class OdometryCalibration extends LinearOpMode {
 
         //Begin calibration (if robot is unable to pivot at these speeds, please adjust the constant at the top of the code
         while(getZAngle() < 90 && opModeIsActive()){
-            right_front.setPower(-PIVOT_SPEED);
-            right_back.setPower(-PIVOT_SPEED);
+            right_front.setPower(PIVOT_SPEED);
+            right_back.setPower(PIVOT_SPEED);
             left_front.setPower(PIVOT_SPEED);
             left_back.setPower(PIVOT_SPEED);
             if(getZAngle() < 60) {
-                setPowerAll(-PIVOT_SPEED, -PIVOT_SPEED, PIVOT_SPEED, PIVOT_SPEED);
+                setPowerAll(PIVOT_SPEED, PIVOT_SPEED, PIVOT_SPEED, PIVOT_SPEED);
             }else{
-                setPowerAll(-PIVOT_SPEED/2, -PIVOT_SPEED/2, PIVOT_SPEED/2, PIVOT_SPEED/2);
+                setPowerAll(PIVOT_SPEED/2, PIVOT_SPEED/2, PIVOT_SPEED/2, PIVOT_SPEED/2);
             }
 
             telemetry.addData("IMU Angle", getZAngle());
+            telemetry.addData("FL", left_front.getPower());
+            telemetry.addData("FR", right_front.getPower());
+            telemetry.addData("BL", left_back.getPower());
+            telemetry.addData("BR", right_back.getPower());
             telemetry.update();
         }
 
@@ -166,11 +170,6 @@ public class OdometryCalibration extends LinearOpMode {
         right_back.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         left_front.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         left_back.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        left_front.setDirection(DcMotorSimple.Direction.REVERSE);
-        right_front.setDirection(DcMotorSimple.Direction.REVERSE);
-        right_back.setDirection(DcMotorSimple.Direction.REVERSE);
-
 
         telemetry.addData("Status", "Hardware Map Init Complete");
         telemetry.update();
