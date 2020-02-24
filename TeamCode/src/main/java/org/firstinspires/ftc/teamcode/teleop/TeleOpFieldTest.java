@@ -8,7 +8,11 @@ public class TeleOpFieldTest extends TeleOpBase {
 
 
     @Override
+<<<<<<< HEAD
     public void initActions() {
+=======
+    void run() {
+>>>>>>> parent of 44f7c19... Added some odometry basics; added aoutonomous ticks moving; camera calibration preset added; removed nonfuctional no multi-threading  code
 
         double[] xPoints = new double[]{0, 75, 5}, yPoints = new double[]{0, 75, 3};
 

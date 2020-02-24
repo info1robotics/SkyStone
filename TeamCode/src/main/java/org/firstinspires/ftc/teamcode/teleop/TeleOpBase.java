@@ -17,9 +17,13 @@ public abstract class TeleOpBase extends LinearOpMode {
     public MovementController movementController;
     public ArmsController armsController;
     public IntakeController intakeController;
+<<<<<<< HEAD
     public FtcDashboard dashboard;
 //    public WebcamVision webcamVision;
 
+=======
+    protected FtcDashboard dashboard;
+>>>>>>> parent of 44f7c19... Added some odometry basics; added aoutonomous ticks moving; camera calibration preset added; removed nonfuctional no multi-threading  code
     //ArmsController armsController;
 
     @Override
@@ -50,7 +54,11 @@ public abstract class TeleOpBase extends LinearOpMode {
 
     }
 
+<<<<<<< HEAD
     public abstract void initActions();
+=======
+    abstract void run();
+>>>>>>> parent of 44f7c19... Added some odometry basics; added aoutonomous ticks moving; camera calibration preset added; removed nonfuctional no multi-threading  code
 
     public abstract void runLoop();
 

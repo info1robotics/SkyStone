@@ -11,9 +11,14 @@ import org.firstinspires.ftc.teamcode.teleop.actions.MoveRobotAction;
 public class TeleOpDefault extends TeleOpBase {
 
     @Override
+<<<<<<< HEAD
     public void initActions() {
         //new ChangeSpeedAction(this);
         new FoundationHookAction(this);
+=======
+    void run() {
+        new ChangeSpeedAction(this, true);
+>>>>>>> parent of 44f7c19... Added some odometry basics; added aoutonomous ticks moving; camera calibration preset added; removed nonfuctional no multi-threading  code
         new MoveRobotAction.MoveRobotMobilityDriver(this, true);
         new MoveRobotAction.MoveRobotArmsDriver(this);
         new IntakeAction(this);
